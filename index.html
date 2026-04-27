@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pascual Lateado — Resultados de encuesta — Samplia</title>
   <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
     rel="stylesheet" />
   <style>
     *,
@@ -18,30 +18,33 @@
     }
 
     :root {
-      --surface: #f8f9ff;
-      --surface-lowest: #f2f6ff;
-      --surface-low: #eef4ff;
-      --surface-mid: #e6eefc;
-      --surface-high: #dce8ff;
-      --surface-highest: #d0e4ff;
-      --primary: #0060a8;
-      --primary-container: #1a7ac4;
-      --primary-dim: #004a84;
-      --on-primary: #ffffff;
-      --on-surface: #001d34;
-      --on-surface-variant: #3d5166;
-      --on-surface-muted: #6b8094;
-      --outline-ghost: rgba(0, 96, 168, .12);
-      --success: #1a7a47;
-      --warning: #b45309;
-      --error: #c62828;
-      --radius-xl: 3rem;
-      --radius-lg: 2rem;
-      --radius-md: 1.5rem;
-      --radius-sm: 0.75rem;
-      --radius-full: 9999px;
-      --shadow-a: 0 8px 40px rgba(0, 29, 52, .05), 0 2px 12px rgba(0, 29, 52, .04);
-      --shadow-f: 0 16px 60px rgba(0, 29, 52, .07), 0 4px 20px rgba(0, 29, 52, .04);
+      --white: #ffffff;
+      --bg: #f6f7f9;
+      --bg-card: #ffffff;
+      --border: rgba(0, 0, 0, .08);
+      --border-strong: rgba(0, 0, 0, .13);
+      --text-primary: #0a0a0a;
+      --text-secondary: #4a5568;
+      --text-tertiary: #8a9bb0;
+      --accent: #0066ff;
+      --accent-light: rgba(0, 102, 255, .08);
+      --accent-mid: rgba(0, 102, 255, .15);
+      --green: #00875a;
+      --green-light: rgba(0, 135, 90, .1);
+      --red: #c0392b;
+      --red-light: rgba(192, 57, 43, .1);
+      --amber: #d97706;
+      --amber-light: rgba(217, 119, 6, .1);
+      --shadow-xs: 0 1px 2px rgba(0, 0, 0, .05);
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, .07), 0 1px 2px rgba(0, 0, 0, .04);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, .06), 0 2px 4px -1px rgba(0, 0, 0, .04);
+      --shadow-lg: 0 10px 24px -4px rgba(0, 0, 0, .08), 0 4px 8px -2px rgba(0, 0, 0, .04);
+      --r-xs: 6px;
+      --r-sm: 10px;
+      --r-md: 14px;
+      --r-lg: 18px;
+      --r-xl: 22px;
+      --r-full: 999px;
     }
 
     html {
@@ -49,732 +52,653 @@
       scroll-behavior: smooth
     }
 
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+      -webkit-font-smoothing: antialiased
+    }
+
+    /* ── SCROLL PROGRESS ── */
     #scrollProgress {
       position: fixed;
       top: 0;
       left: 0;
       width: 0%;
-      height: 4px;
-      background: linear-gradient(90deg, var(--primary), #38bdf8);
+      height: 2px;
+      background: var(--accent);
       z-index: 2000;
-      box-shadow: 0 0 10px rgba(0, 96, 168, .4)
+      transition: width .1s linear
     }
 
-    body {
-      font-family: 'Manrope', sans-serif;
-      background: var(--surface);
-      color: var(--on-surface);
-      min-height: 100vh;
-      padding-bottom: 3rem
-    }
-
-    /* HEADER */
-    .header {
-      background: var(--surface-lowest);
-      padding: 0 2rem;
+    /* ── NAV ── */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, .85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      height: 56px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 64px;
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      box-shadow: 0 2px 20px rgba(0, 29, 52, .04)
+      padding: 0 24px;
     }
 
-    .samplia-logo {
-      width: 109px;
-      height: auto;
-      display: block
+    .nav-logo {
+      height: 32px;
+      display: block;
+      opacity: .9
     }
 
-    .header-right {
+    .nav-right {
       display: flex;
       align-items: center;
-      gap: 10px
+      gap: 12px
     }
 
-    .live-pill {
-      display: flex;
+    .live-badge {
+      display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: rgba(0, 96, 168, .10);
-      color: var(--primary);
-      font-size: 10px;
-      font-weight: 700;
-      padding: 5px 12px;
-      border-radius: var(--radius-full);
-      text-transform: uppercase;
-      letter-spacing: .6px
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .02em;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 4px 10px;
+      border-radius: var(--r-full);
     }
 
     .live-dot {
-      width: 6px;
-      height: 6px;
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
-      background: var(--primary);
-      animation: blink 1.4s infinite
+      background: var(--accent);
+      animation: pulse 1.6s ease-in-out infinite
     }
 
-    @keyframes blink {
+    @keyframes pulse {
 
       0%,
       100% {
-        opacity: 1
+        opacity: 1;
+        transform: scale(1)
       }
 
       50% {
-        opacity: .2
+        opacity: .4;
+        transform: scale(.8)
       }
     }
 
     .last-update {
       font-size: 11px;
-      color: var(--on-surface-muted)
+      color: var(--text-tertiary);
+      cursor: pointer;
+      font-variant-numeric: tabular-nums
     }
 
-    /* TITLE BAR */
-    .title-bar {
-      background: linear-gradient(135deg, var(--primary-dim) 0%, var(--primary) 50%, var(--primary-container) 100%);
-      background-size: 200% 200%;
-      animation: gradientMove 8s ease-in-out infinite alternate;
-      padding: 2rem 2rem 2.5rem;
+    .last-update:hover {
+      color: var(--text-secondary)
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 36px 24px 32px;
+    }
+
+    .hero-inner {
+      max-width: 1120px;
+      margin: 0 auto;
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      gap: 1.5rem;
-      flex-wrap: wrap;
-      position: relative;
-      overflow: hidden
+      gap: 24px;
+      flex-wrap: wrap
     }
 
-    @keyframes gradientMove {
-      0% {
-        background-position: 0% 50%
-      }
-
-      100% {
-        background-position: 100% 50%
-      }
-    }
-
-    .title-bar::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(ellipse at 75% -10%, rgba(255, 255, 255, .14) 0%, transparent 60%);
-      pointer-events: none
-    }
-
-    .title-left {
+    .hero-left {
       flex: 1;
-      min-width: 260px;
-      position: relative
+      min-width: 240px
     }
 
-    .brand-title {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      color: var(--on-primary);
-      font-size: clamp(1.8rem, 4vw, 2.75rem);
-      font-weight: 900;
-      letter-spacing: -.5px;
-      line-height: 1.1
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px
     }
 
-    .title-sub {
-      font-family: 'Manrope', sans-serif;
-      color: rgba(255, 255, 255, .82);
-      font-size: clamp(.8rem, 1.8vw, .95rem);
-      font-weight: 500;
-      margin-top: .4rem
+    .hero-title {
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 700;
+      letter-spacing: -.03em;
+      line-height: 1.1;
+      color: var(--text-primary)
     }
 
-    .location-box {
+    .hero-sub {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-top: 6px;
+      font-weight: 400
+    }
+
+    .hero-meta {
       display: flex;
       flex-direction: column;
-      gap: 7px;
-      background: rgba(255, 255, 255, .10);
-      backdrop-filter: blur(24px);
-      border-radius: var(--radius-md);
+      gap: 8px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
       padding: 14px 18px;
-      border: 1px solid rgba(255, 255, 255, .18)
+      min-width: 220px;
     }
 
-    .location-line {
-      display: flex;
-      align-items: flex-start;
-      gap: 7px;
-      font-size: clamp(10px, 1.4vw, 12px);
-      color: rgba(255, 255, 255, .92);
-      line-height: 1.4
-    }
-
-    /* CONTENT */
-    .content {
-      padding: 2rem;
-      max-width: 1140px;
-      margin: 0 auto
-    }
-
-    /* STAT CARDS */
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px
-    }
-
-    .stat-card {
-      background: linear-gradient(145deg, #022c4d 0%, var(--on-surface) 100%);
-      border-radius: 2.2rem;
-      padding: 1.6rem 1.5rem;
-      color: var(--on-primary);
-      position: relative;
-      overflow: hidden;
-      box-shadow: var(--shadow-f);
-      border: 1px solid rgba(255, 255, 255, .05);
-      transition: transform .3s cubic-bezier(.34, 1.56, .64, 1), box-shadow .3s ease;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 125px
-    }
-
-    .stat-card:hover {
-      transform: translateY(-5px) scale(1.02);
-      box-shadow: 0 20px 40px rgba(0, 29, 52, .15)
-    }
-
-    .stat-card::before {
-      content: '';
-      position: absolute;
-      top: -15%;
-      left: -15%;
-      width: 50%;
-      height: 50%;
-      background: radial-gradient(circle, rgba(255, 255, 255, .08) 0%, transparent 70%);
-      pointer-events: none
-    }
-
-    .stat-card::after {
-      content: '';
-      position: absolute;
-      bottom: -15px;
-      right: -15px;
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, rgba(255, 255, 255, .05), transparent)
-    }
-
-    .stat-icon-wrap {
-      position: absolute;
-      top: 1.25rem;
-      right: 1.25rem;
-      width: 32px;
-      height: 32px;
-      background: rgba(255, 255, 255, .08);
-      border-radius: 10px;
+    .meta-row {
       display: flex;
       align-items: center;
-      justify-content: center;
-      color: rgba(255, 255, 255, .8);
-      backdrop-filter: blur(4px)
+      gap: 8px;
+      font-size: 12px;
+      color: var(--text-secondary)
     }
 
-    .stat-label {
-      font-size: 10px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: .8px;
-      color: rgba(255, 255, 255, .65);
-      margin-bottom: 2px
+    .meta-row svg {
+      flex-shrink: 0;
+      opacity: .5
     }
 
-    .stat-value {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(1.4rem, 2.8vw, 1.85rem);
-      font-weight: 900;
-      line-height: 1.1;
-      letter-spacing: -.5px;
-      background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, .8) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent
-    }
-
-    .stat-sub {
-      font-size: 10px;
+    .meta-row strong {
       font-weight: 600;
-      color: rgba(255, 255, 255, .45);
-      margin-top: 4px
+      color: var(--text-primary)
     }
 
-    /* FILTER BAR */
-    .filter-bar {
-      background: var(--surface-lowest);
-      border-radius: var(--radius-full);
-      padding: .6rem .6rem .6rem 1.25rem;
+    /* ── MAIN LAYOUT ── */
+    .main {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 32px 24px 60px
+    }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
       display: flex;
       align-items: center;
       gap: 10px;
+      margin: 40px 0 16px
+    }
+
+    .section-header:first-child {
+      margin-top: 0
+    }
+
+    .section-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0
+    }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-tertiary)
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: var(--border)
+    }
+
+    /* ── CARDS ── */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+
+    .card-inner {
+      padding: 20px
+    }
+
+    .card-header {
+      margin-bottom: 16px
+    }
+
+    .card-label {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-bottom: 4px
+    }
+
+    .card-question {
+      font-size: 12px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      font-weight: 400
+    }
+
+    /* ── HERO STAT STRIP ── */
+    .stat-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--border);
+      border-radius: var(--r-xl);
+      overflow: hidden;
+      border: 1px solid var(--border)
+    }
+
+    .stat-strip-item {
+      background: var(--bg-card);
+      padding: 22px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: relative;
+      transition: background .15s;
+    }
+
+    .stat-strip-item:hover {
+      background: var(--bg)
+    }
+
+    .stat-strip-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--r-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--accent-light);
+      color: var(--accent);
+      position: absolute;
+      top: 22px;
+      right: 20px;
+    }
+
+    .stat-strip-label {
+      font-size: 10.5px;
+      font-weight: 600;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      color: var(--text-tertiary)
+    }
+
+    .stat-strip-value {
+      font-size: clamp(20px, 3vw, 28px);
+      font-weight: 700;
+      letter-spacing: -.03em;
+      color: var(--text-primary);
+      font-family: 'DM Mono', monospace
+    }
+
+    .stat-strip-sub {
+      font-size: 11px;
+      color: var(--text-tertiary)
+    }
+
+    /* ── KPI GRID ── */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px
+    }
+
+    .kpi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: 18px 16px;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      overflow: hidden;
+      transition: box-shadow .2s, transform .2s;
+    }
+
+    .kpi-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px)
+    }
+
+    .kpi-card-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px
+    }
+
+    .kpi-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: var(--text-tertiary);
+      margin-bottom: 10px
+    }
+
+    .kpi-value {
+      font-size: clamp(24px, 3.5vw, 32px);
+      font-weight: 700;
+      letter-spacing: -.04em;
+      line-height: 1;
+      font-family: 'DM Mono', monospace
+    }
+
+    .kpi-sub {
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-top: 6px
+    }
+
+    .bench-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: var(--r-full);
+      margin-top: 6px;
+    }
+
+    .bench-tag.up {
+      background: var(--green-light);
+      color: var(--green)
+    }
+
+    .bench-tag.down {
+      background: var(--red-light);
+      color: var(--red)
+    }
+
+    .bench-tag.neutral {
+      background: var(--bg);
+      color: var(--text-tertiary)
+    }
+
+    /* ── FILTER BAR ── */
+    .filter-bar {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-full);
+      padding: 6px 6px 6px 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
       flex-wrap: wrap;
+      box-shadow: var(--shadow-xs);
       position: sticky;
-      top: 72px;
-      z-index: 40;
-      box-shadow: 0 4px 20px rgba(0, 29, 52, .06), 0 1px 6px rgba(0, 29, 52, .04);
-      transition: box-shadow .3s ease, background .3s ease;
-      border: 1px solid rgba(0, 96, 168, .08);
-      margin-bottom: 2rem
+      top: 64px;
+      z-index: 90;
+      transition: box-shadow .2s;
     }
 
     .filter-bar.is-sticky {
-      background: rgba(248, 249, 255, .94);
-      backdrop-filter: blur(28px);
-      -webkit-backdrop-filter: blur(28px);
-      box-shadow: 0 8px 32px rgba(0, 29, 52, .12), 0 2px 12px rgba(0, 29, 52, .08)
+      box-shadow: var(--shadow-md)
     }
 
     .filter-label {
       font-size: 10px;
       font-weight: 700;
-      color: var(--on-surface-muted);
+      letter-spacing: .07em;
       text-transform: uppercase;
-      letter-spacing: .5px;
+      color: var(--text-tertiary);
       white-space: nowrap
-    }
-
-    .filter-select {
-      font-family: 'Manrope', sans-serif;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--on-surface);
-      background: var(--surface-high);
-      border: none;
-      outline: none;
-      border-radius: var(--radius-full);
-      padding: 8px 32px 8px 14px;
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%233d5166' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 11px center;
-      cursor: pointer;
-      transition: background .2s
-    }
-
-    .filter-select:focus {
-      background-color: var(--surface-highest)
     }
 
     .filter-sep {
       width: 1px;
-      height: 20px;
-      background: rgba(0, 29, 52, .08)
-    }
-
-    /* KPI ROW */
-    .kpi-row {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 14px
-    }
-
-    .kpi {
-      background: var(--surface-low);
-      border-radius: 2.2rem;
-      padding: 1.6rem 1.5rem;
-      box-shadow: var(--shadow-a);
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      min-height: 145px;
-      border: 1px solid rgba(0, 96, 168, .03);
-      transition: transform .3s ease, box-shadow .3s ease
-    }
-
-    .kpi:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-f);
-      border-color: rgba(0, 96, 168, .1)
-    }
-
-    .kpi-icon-wrap {
-      position: absolute;
-      top: 1.5rem;
-      right: 1.5rem;
-      width: 36px;
-      height: 36px;
-      background: var(--surface-mid);
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--primary)
-    }
-
-    .kpi-accent {
-      position: absolute;
-      top: 0;
-      left: 1.5rem;
-      right: 1.5rem;
-      height: 3px;
-      border-radius: 0 0 4px 4px;
-      background: linear-gradient(90deg, var(--primary), var(--primary-container))
-    }
-
-    .kpi-label {
-      font-size: 10px;
-      font-weight: 800;
-      color: var(--on-surface-muted);
-      text-transform: uppercase;
-      letter-spacing: .8px;
-      margin-bottom: 6px
-    }
-
-    .kpi-value {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(1.6rem, 3.2vw, 2.15rem);
-      font-weight: 900;
-      color: var(--on-surface);
-      line-height: 1.1;
-      letter-spacing: -1.2px
-    }
-
-    .kpi-sub {
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--on-surface-variant);
-      margin-top: 4px;
-      line-height: 1.4
-    }
-
-    .bench-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      background: var(--surface-highest);
-      border-radius: var(--radius-full);
-      padding: 3px 10px
-    }
-
-    .bench-label {
-      font-size: 8.5px;
-      font-weight: 700;
-      color: var(--on-surface-muted);
-      text-transform: uppercase;
-      letter-spacing: .4px
-    }
-
-    .bench-val {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 11px;
-      font-weight: 800
-    }
-
-
-    /* SECTION LABEL */
-    .section-label {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: .68rem;
-      font-weight: 800;
-      color: var(--primary);
-      text-transform: uppercase;
-      letter-spacing: 1.4px;
-      margin: 2.5rem 0 1.1rem
-    }
-
-    /* GRIDS */
-    .grid-2 {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 14px;
-      margin-bottom: 14px
-    }
-
-    .grid-3 {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-bottom: 14px
-    }
-
-    .grid-4 {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 10px;
-      margin-bottom: 12px
-    }
-
-    /* CARDS */
-    .card {
-      background: var(--surface-low);
-      border-radius: var(--radius-xl);
-      padding: 1.75rem 1.6rem;
-      box-shadow: var(--shadow-a)
-    }
-
-    .card-title {
-      font-size: .68rem;
-      font-weight: 700;
-      color: var(--on-surface-muted);
-      text-transform: uppercase;
-      letter-spacing: .55px;
-      margin-bottom: 1.25rem;
-      display: flex;
-      align-items: center;
-      gap: 8px
-    }
-
-    .card-title::before {
-      content: '';
-      display: inline-block;
-      width: 3px;
-      height: 14px;
-      background: linear-gradient(180deg, var(--primary), var(--primary-container));
-      border-radius: 2px;
+      height: 16px;
+      background: var(--border);
       flex-shrink: 0
     }
 
-    /* CHARTS */
+    .filter-select {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-primary);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--r-full);
+      padding: 6px 28px 6px 12px;
+      appearance: none;
+      outline: none;
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%238a9bb0' d='M5 7L1 3h8z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      transition: border-color .15s, background .15s;
+    }
+
+    .filter-select:focus {
+      border-color: var(--accent);
+      background-color: var(--white)
+    }
+
+    /* ── CHARTS ── */
     .chart-wrap {
       position: relative;
       width: 100%
     }
 
-    .chart-note {
-      margin-top: .7rem;
-      font-size: .66rem;
-      color: var(--on-surface-muted);
-      line-height: 1.4;
-      text-align: center
-    }
-
     .h110 {
-      height: clamp(90px, 16vw, 112px)
+      height: clamp(90px, 14vw, 110px)
     }
 
-    .h130 {
-      height: clamp(100px, 18vw, 132px)
-    }
-
-    .h150 {
-      height: clamp(110px, 20vw, 152px)
+    .h140 {
+      height: clamp(110px, 18vw, 140px)
     }
 
     .h180 {
-      height: clamp(130px, 22vw, 182px)
+      height: clamp(140px, 22vw, 180px)
     }
 
-    .h200 {
-      height: clamp(150px, 25vw, 202px)
+    .h220 {
+      height: clamp(160px, 26vw, 220px)
     }
 
-    .h230 {
-      height: clamp(165px, 28vw, 232px)
-    }
-
-    .h255 {
-      height: clamp(180px, 32vw, 258px)
+    .h260 {
+      height: clamp(180px, 30vw, 260px)
     }
 
     .h300 {
-      height: clamp(200px, 36vw, 302px)
+      height: clamp(200px, 34vw, 300px)
     }
 
-    .h350 {
-      height: clamp(220px, 40vw, 352px)
+    .chart-note {
+      font-size: 11px;
+      color: var(--text-tertiary);
+      margin-top: 8px;
+      text-align: center;
+      line-height: 1.5
     }
 
-    .h400 {
-      height: clamp(250px, 45vw, 402px)
-    }
-
-    .h450 {
-      height: clamp(280px, 50vw, 460px)
-    }
-
-    /* MINI STATS */
-    .mini-stat {
-      background: var(--surface-mid);
-      border-radius: calc(var(--radius-lg) + 1px);
-      padding: .85rem;
-      text-align: center
-    }
-
-    .mini-stat-label {
-      font-size: .59rem;
-      font-weight: 700;
-      color: var(--on-surface-muted);
-      text-transform: uppercase;
-      letter-spacing: .45px;
-      margin-bottom: 4px
-    }
-
-    .mini-stat-value {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(1rem, 2.4vw, 1.25rem);
-      font-weight: 800;
-      color: var(--on-surface);
-      line-height: 1;
-      letter-spacing: -.5px
-    }
-
-    .mini-stat-value.red {
-      color: var(--error)
-    }
-
-    .mini-stat-value.green {
-      color: var(--success)
-    }
-
-    .mini-stat-value.orange {
-      color: var(--warning)
-    }
-
-    .mini-stat-value.blue {
-      color: #0060a8
-    }
-
-    .mini-stat-value.light-gray {
-      color: #b8c2cc
-    }
-
-    .mini-stat-value.green-gradient {
-      background: linear-gradient(145deg, #9CCC65 0%, #1a7a47 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      display: inline-block
-    }
-
-    /* AGREEMENT CARDS */
-    .agreement-card {
-      background: var(--surface-mid);
-      border-radius: calc(var(--radius-lg) + 1px);
-      padding: 1.1rem 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: 14px
-    }
-
-    .agreement-title {
-      font-size: .68rem;
-      font-weight: 800;
-      color: var(--on-surface);
-      line-height: 1.45;
-      letter-spacing: -.1px
-    }
-
-    .agreement-top {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
+    /* ── GRIDS ── */
+    .g2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       gap: 12px
     }
 
-    .agreement-kpi-label {
-      font-size: .58rem;
-      font-weight: 800;
-      color: var(--on-surface-muted);
+    .g3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px
+    }
+
+    .g4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px
+    }
+
+    /* ── MINI STATS ── */
+    .mini-grid {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 12px
+    }
+
+    .mini-stat {
+      background: var(--bg);
+      border-radius: var(--r-md);
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .mini-label {
+      font-size: 9.5px;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: .45px;
-      margin-bottom: 4px
+      letter-spacing: .06em;
+      color: var(--text-tertiary)
     }
 
-    .agreement-kpi-value {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(1.2rem, 2.8vw, 1.55rem);
-      font-weight: 900;
-      line-height: 1;
-      letter-spacing: -.6px
+    .mini-value {
+      font-size: clamp(14px, 2.5vw, 18px);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      font-family: 'DM Mono', monospace
     }
 
-    .agreement-kpi-value.red {
-      color: var(--error)
+    .mini-value.green {
+      color: var(--green)
     }
 
-    .agreement-kpi-value.green {
-      color: var(--success)
+    .mini-value.red {
+      color: var(--red)
     }
 
-    .agreement-kpi-value.blue {
-      color: #0060a8
+    .mini-value.amber {
+      color: var(--amber)
+    }
+
+    .mini-value.blue {
+      color: var(--accent)
+    }
+
+    .mini-value.light-blue {
+      color: #6ba3ff
+    }
+
+    .mini-value.muted {
+      color: var(--text-tertiary)
+    }
+
+    /* ── AGREEMENT ── */
+    .agreement-card {
+      background: var(--bg);
+      border-radius: var(--r-lg);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .agreement-title {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.45;
+      letter-spacing: -.01em
     }
 
     .agreement-bar {
       display: flex;
-      width: 100%;
-      height: 14px;
-      background: var(--surface-high);
-      border-radius: 999px;
-      overflow: hidden
+      height: 6px;
+      border-radius: var(--r-full);
+      overflow: hidden;
+      background: var(--border)
     }
 
     .agreement-seg {
       height: 100%
     }
 
-    .agreement-dis {
-      background: #e06272
+    .seg-dis {
+      background: #e5a0a0
     }
 
-    .agreement-neu {
-      background: #b8c2cc
+    .seg-neu {
+      background: #d0d7e0
     }
 
-    .agreement-agr {
-      background: linear-gradient(90deg, #9CCC65 0%, #1a7a47 100%)
+    .seg-agr {
+      background: linear-gradient(90deg, #52c97b, #00875a)
     }
 
     .agreement-legend {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap
     }
 
     .agreement-metric {
       display: flex;
       flex-direction: column;
-      gap: 4px
+      gap: 2px
     }
 
-    .agreement-metric-label {
-      font-size: .58rem;
-      font-weight: 800;
-      color: var(--on-surface-muted);
+    .agreement-metric-val {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      font-family: 'DM Mono', monospace
+    }
+
+    .agreement-metric-val.red {
+      color: var(--red)
+    }
+
+    .agreement-metric-val.muted {
+      color: var(--text-tertiary)
+    }
+
+    .agreement-metric-val.green {
+      color: var(--green)
+    }
+
+    .agreement-metric-val.blue {
+      color: var(--accent)
+    }
+
+    .agreement-metric-lbl {
+      font-size: 9px;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: .42px
+      letter-spacing: .06em;
+      color: var(--text-tertiary)
     }
 
-    .agreement-metric-value {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 1rem;
-      font-weight: 800;
-      line-height: 1
-    }
-
-    .agreement-metric-value.red {
-      color: var(--error)
-    }
-
-    .agreement-metric-value.light-gray {
-      color: #b8c2cc
-    }
-
-    .agreement-metric-value.green {
-      color: var(--success)
-    }
-
-    .agreement-metric-value.blue {
-      color: #0060a8
-    }
-
-    /* WAFFLE */
+    /* ── WAFFLE ── */
     .waffle-wrap {
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: clamp(120px, 22vw, 155px);
+      height: clamp(120px, 20vw, 150px);
       gap: 10px
     }
 
@@ -784,19 +708,17 @@
       grid-template-rows: repeat(5, 1fr);
       gap: 2px;
       width: 100%;
-      height: clamp(75px, 15vw, 95px)
+      height: clamp(70px, 14vw, 90px)
     }
 
     .waffle-item {
-      width: 100%;
-      height: 100%;
       border-radius: 2px;
-      background: var(--surface-high);
-      transition: transform .2s
+      transition: transform .15s;
+      cursor: default
     }
 
     .waffle-item:hover {
-      transform: scale(1.2);
+      transform: scale(1.3);
       z-index: 2
     }
 
@@ -811,405 +733,308 @@
       display: flex;
       align-items: center;
       gap: 5px;
-      font-size: .66rem;
-      font-weight: 600;
-      color: var(--on-surface-variant)
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-secondary)
     }
 
     .legend-dot {
-      width: 8px;
-      height: 8px;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
       flex-shrink: 0
     }
 
-    /* NPS BAR */
-    .nps-bar {
-      display: flex;
-      height: 8px;
-      border-radius: var(--radius-full);
-      overflow: hidden;
-      margin: 12px 0 4px;
-      width: 100%
-    }
-
-    .nps-det {
-      background: var(--error)
-    }
-
-    .nps-pas {
-      background: #9CCC65
-    }
-
-    .nps-pro {
-      background: var(--success)
-    }
-
-    /* RECOMMENDATION SUMMARY */
-    .recommend-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 16px
-    }
-
-    .recommend-top {
-      display: grid;
-      grid-template-columns: minmax(220px, 1.1fr) repeat(3, minmax(0, 1fr));
-      gap: 14px;
-      align-items: stretch
-    }
-
-    .recommend-hero {
-      background: linear-gradient(145deg, #022c4d 0%, var(--on-surface) 100%);
-      border-radius: 2rem;
-      padding: 1.4rem 1.5rem;
-      color: var(--on-primary);
-      box-shadow: var(--shadow-f);
+    /* ── NPS SECTION ── */
+    .nps-hero {
+      background: linear-gradient(-45deg, #0066ff, #0044cc, #0088ff, #002288);
+      background-size: 400% 400%;
+      animation: npsGradient 15s ease infinite;
+      border-radius: var(--r-xl);
+      padding: 22px 20px;
+      color: #fff;
       display: flex;
       flex-direction: column;
       justify-content: center;
-      min-height: 132px
+      box-shadow: 0 10px 20px -5px rgba(0, 102, 255, 0.3);
     }
 
-    .recommend-hero-label {
-      font-size: .62rem;
-      font-weight: 800;
-      color: rgba(255, 255, 255, .7);
+    @keyframes npsGradient {
+      0% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    .nps-hero-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .08em;
       text-transform: uppercase;
-      letter-spacing: .55px;
+      color: rgba(255, 255, 255, .5);
       margin-bottom: 8px
     }
 
-    .recommend-hero-value {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      font-weight: 900;
+    .nps-hero-value {
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 700;
+      letter-spacing: -.05em;
       line-height: 1;
-      letter-spacing: -1px
+      font-family: 'Poppins', sans-serif;
     }
 
-    .recommend-hero-sub {
-      margin-top: 8px;
-      font-size: .72rem;
-      color: rgba(255, 255, 255, .8);
-      font-weight: 600
+    .nps-hero-sub {
+      font-size: 12px;
+      color: rgba(255, 255, 255, .6);
+      margin-top: 8px
     }
 
-    .recommend-stat {
-      background: var(--surface-mid);
-      border-radius: 2rem;
-      padding: 1.15rem 1rem;
+    .nps-stat-card {
+      background: var(--bg);
+      border-radius: var(--r-xl);
+      padding: 16px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      min-height: 132px
+      justify-content: center
     }
 
-    .recommend-stat-label {
-      font-size: .6rem;
-      font-weight: 800;
-      color: var(--on-surface-muted);
+    .nps-stat-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .07em;
       text-transform: uppercase;
-      letter-spacing: .5px;
+      color: var(--text-tertiary);
       margin-bottom: 8px
     }
 
-    .recommend-stat-value {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: clamp(1.35rem, 2.8vw, 1.8rem);
-      font-weight: 900;
+    .nps-stat-value {
+      font-size: clamp(22px, 3vw, 30px);
+      font-weight: 700;
+      letter-spacing: -.03em;
       line-height: 1;
-      letter-spacing: -.6px
+      font-family: 'Poppins', sans-serif;
     }
 
-    .recommend-stat-value.red {
-      color: var(--error)
+    .nps-stat-sub {
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-top: 6px
     }
 
-    .recommend-stat-value.gray {
-      color: #7c8a99
+    .nps-bar-section {
+      background: var(--bg);
+      border-radius: var(--r-xl);
+      padding: 18px
     }
 
-    .recommend-stat-value.green {
-      color: var(--success)
-    }
-
-    .recommend-stat-value.blue {
-      color: #0060a8
-    }
-
-    .recommend-stat-sub {
-      margin-top: 8px;
-      font-size: .68rem;
-      color: var(--on-surface-variant);
-      font-weight: 600
-    }
-
-    .recommend-band {
-      background: var(--surface-mid);
-      border-radius: 2rem;
-      padding: 1.2rem
-    }
-
-    .recommend-band-top {
+    .nps-bar-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      margin-bottom: 12px;
       gap: 12px;
-      margin-bottom: 10px;
       flex-wrap: wrap
     }
 
-    .recommend-band-title {
-      font-size: .66rem;
-      font-weight: 800;
-      color: var(--on-surface-muted);
+    .nps-bar-title {
+      font-size: 10.5px;
+      font-weight: 700;
+      letter-spacing: .07em;
       text-transform: uppercase;
-      letter-spacing: .5px
+      color: var(--text-tertiary)
     }
 
-    .recommend-band-note {
-      font-size: .68rem;
-      color: var(--on-surface-variant);
-      font-weight: 600
+    .nps-bar-note {
+      font-size: 11px;
+      color: var(--text-secondary)
     }
 
-    .recommend-band-bar {
+    .nps-bar {
       display: flex;
-      width: 100%;
-      height: 18px;
-      border-radius: 999px;
+      height: 8px;
+      border-radius: var(--r-full);
       overflow: hidden;
-      background: var(--surface-high)
+      background: var(--border)
     }
 
-    .recommend-band-seg {
-      height: 100%
+    .nps-det {
+      background: #c0392b
     }
 
-    .recommend-band-seg.det {
-      background: #8b1e2d
+    .nps-pas {
+      background: #cbd5e0
     }
 
-    .recommend-band-seg.pas {
-      background: #b8c2cc
+    .nps-pro {
+      background: linear-gradient(90deg, #3b82f6, var(--accent))
     }
 
-    .recommend-band-seg.pro {
-      background: linear-gradient(90deg, #57a8e9 0%, #0060a8 100%)
-    }
-
-    .recommend-legend {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 12px
-    }
-
-    .recommend-legend-item {
-      display: flex;
-      flex-direction: column;
-      gap: 4px
-    }
-
-    .recommend-legend-value {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 1rem;
-      font-weight: 800;
-      line-height: 1
-    }
-
-    .recommend-legend-value.det {
-      color: #8b1e2d
-    }
-
-    .recommend-legend-value.pas {
-      color: #7c8a99
-    }
-
-    .recommend-legend-value.pro {
-      color: #0060a8
-    }
-
-    .recommend-legend-label {
-      font-size: .62rem;
-      font-weight: 800;
-      color: var(--on-surface-muted);
-      text-transform: uppercase;
-      letter-spacing: .45px
-    }
-
-    /* INSIGHTS */
-    .insights-grid {
+    .nps-legend-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-bottom: 2rem
+      gap: 12px;
+      margin-top: 14px
+    }
+
+    .nps-leg-item {
+      display: flex;
+      flex-direction: column;
+      gap: 3px
+    }
+
+    .nps-leg-value {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -.02em;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .nps-leg-value.det {
+      color: var(--red)
+    }
+
+    .nps-leg-value.pas {
+      color: var(--text-tertiary)
+    }
+
+    .nps-leg-value.pro {
+      color: var(--accent)
+    }
+
+    .nps-leg-label {
+      font-size: 9.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--text-tertiary)
+    }
+
+    /* ── RECOMMEND LAYOUT ── */
+    .recommend-grid {
+      display: grid;
+      grid-template-columns: minmax(180px, 1fr) repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 10px
+    }
+
+    /* ── INSIGHTS ── */
+    .insight-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px
     }
 
     .insight-card {
-      background: #ffffff;
-      border-radius: 2rem;
-      padding: 1.7rem;
-      display: flex;
-      flex-direction: column;
-      gap: .8rem;
-      box-shadow: var(--shadow-a);
-      border: 1px solid rgba(0, 96, 168, .05);
-      transition: all .3s cubic-bezier(.4, 0, .2, 1);
-      position: relative;
-      overflow: hidden
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow .2s, transform .2s;
     }
 
     .insight-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-f);
-      border-color: rgba(0, 96, 168, .15)
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px)
     }
 
     .insight-icon {
-      width: 44px;
-      height: 44px;
-      background: linear-gradient(135deg, #f0f7ff 0%, #daeeff 100%);
-      border-radius: 14px;
+      width: 36px;
+      height: 36px;
+      border-radius: var(--r-sm);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--primary);
-      margin-bottom: .4rem
+      background: var(--accent-light);
+      color: var(--accent);
+      margin-bottom: 12px
     }
 
     .insight-title {
-      font-size: .88rem;
-      font-weight: 800;
-      color: var(--on-surface);
-      letter-spacing: -.2px;
-      margin-bottom: 2px
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: -.01em;
+      margin-bottom: 6px
     }
 
     .insight-body {
-      font-size: .78rem;
-      line-height: 1.6;
-      color: var(--on-surface-muted);
-      font-weight: 500
+      font-size: 12px;
+      line-height: 1.65;
+      color: var(--text-secondary)
     }
 
     .insight-body strong {
-      color: var(--primary);
-      font-weight: 800
+      color: var(--accent);
+      font-weight: 700
     }
 
-    /* FOOTER */
-    .footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 2.5rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid var(--surface-high)
-    }
-
-    .footer-info {
-      font-size: .7rem;
-      color: var(--on-surface-muted);
-      font-weight: 500
-    }
-
-    .footer-right {
-      display: flex;
-      align-items: center;
-      gap: 10px
-    }
-
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: linear-gradient(135deg, var(--primary), var(--primary-container));
-      color: var(--on-primary);
-      font-family: 'Manrope', sans-serif;
-      font-size: .78rem;
-      font-weight: 700;
-      padding: 10px 20px;
-      border-radius: var(--radius-full);
-      border: none;
-      cursor: pointer;
-      text-decoration: none;
-      white-space: nowrap;
-      flex-shrink: 0;
-      transition: transform .2s, box-shadow .2s;
-      box-shadow: 0 4px 20px rgba(0, 96, 168, .35)
-    }
-
-    .btn-primary:hover {
-      transform: scale(1.03);
-      box-shadow: 0 6px 28px rgba(0, 96, 168, .45)
-    }
-
-    /* PHOTO GALLERY */
+    /* ── MEDIA ── */
     .photo-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
-      margin-bottom: 2rem
+      gap: 10px
     }
 
     .photo-card {
       position: relative;
-      border-radius: var(--radius-xl);
+      border-radius: var(--r-lg);
       overflow: hidden;
       aspect-ratio: 4/3;
       cursor: pointer;
-      box-shadow: var(--shadow-a);
-      transition: transform .3s ease, box-shadow .3s ease;
-      background: var(--surface-mid)
+      background: var(--bg);
+      border: 1px solid var(--border);
+      transition: transform .25s cubic-bezier(.4, 0, .2, 1), box-shadow .25s;
     }
 
     .photo-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-f)
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg)
     }
 
     .photo-card img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform .5s cubic-bezier(.4, 0, .2, 1)
+      transition: transform .4s cubic-bezier(.4, 0, .2, 1)
     }
 
     .photo-card:hover img {
-      transform: scale(1.1)
+      transform: scale(1.06)
     }
 
     .zoom-overlay {
       position: absolute;
       inset: 0;
-      background: rgba(0, 24, 43, 0);
+      background: rgba(0, 0, 0, 0);
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: background .3s ease
+      transition: background .25s
     }
 
     .photo-card:hover .zoom-overlay {
-      background: rgba(0, 24, 43, .4)
+      background: rgba(0, 0, 0, .35)
     }
 
     .zoom-btn {
-      width: 44px;
-      height: 44px;
-      background: #ffffff;
+      width: 36px;
+      height: 36px;
+      background: #fff;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       opacity: 0;
-      transform: scale(.7);
-      transition: opacity .3s ease, transform .3s cubic-bezier(.175, .885, .32, 1.275);
-      color: var(--primary);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, .2)
+      transform: scale(.6);
+      transition: opacity .25s, transform .3s cubic-bezier(.175, .885, .32, 1.275);
+      color: var(--accent)
     }
 
     .photo-card:hover .zoom-btn {
@@ -1217,20 +1042,19 @@
       transform: scale(1)
     }
 
-    /* LIGHTBOX */
+    /* ── LIGHTBOX ── */
     .lightbox {
       position: fixed;
       inset: 0;
-      background: rgba(0, 18, 32, .92);
+      background: rgba(0, 0, 0, .85);
       z-index: 2000;
       display: none;
       align-items: center;
       justify-content: center;
-      padding: 2rem;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
+      padding: 24px;
+      backdrop-filter: blur(16px);
       opacity: 0;
-      transition: opacity .3s ease
+      transition: opacity .25s
     }
 
     .lightbox.active {
@@ -1239,11 +1063,9 @@
     }
 
     .lightbox-content {
-      max-width: 94%;
-      max-height: 94%;
       position: relative;
-      transform: scale(.9);
-      transition: transform .4s cubic-bezier(.165, .84, .44, 1)
+      transform: scale(.92);
+      transition: transform .35s cubic-bezier(.165, .84, .44, 1)
     }
 
     .lightbox.active .lightbox-content {
@@ -1251,29 +1073,28 @@
     }
 
     .lightbox-content img {
-      max-width: 100%;
+      max-width: 94vw;
       max-height: 88vh;
-      border-radius: var(--radius-md);
-      box-shadow: 0 40px 100px rgba(0, 0, 0, .6);
-      border: 1px solid rgba(255, 255, 255, .1)
+      border-radius: var(--r-lg);
+      box-shadow: 0 40px 80px rgba(0, 0, 0, .5)
     }
 
     .lightbox-close {
       position: absolute;
-      top: -48px;
+      top: -44px;
       right: 0;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-family: 'Manrope', sans-serif;
-      font-size: .8rem;
-      font-weight: 700;
-      cursor: pointer;
       background: rgba(255, 255, 255, .1);
       border: none;
-      padding: 8px 16px;
-      border-radius: var(--radius-full);
+      color: #fff;
+      cursor: pointer;
+      padding: 7px 14px;
+      border-radius: var(--r-full);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
       transition: background .2s
     }
 
@@ -1281,6 +1102,109 @@
       background: rgba(255, 255, 255, .2)
     }
 
+    /* ── FOOTER ── */
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 48px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border)
+    }
+
+    .footer-info {
+      font-size: 11px;
+      color: var(--text-tertiary)
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--text-primary);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 9px 18px;
+      border-radius: var(--r-full);
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background .2s, transform .15s, box-shadow .15s;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-primary:hover {
+      background: #1a1a1a;
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md)
+    }
+
+    /* ── ERROR BANNER ── */
+    #dataBanner {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 999;
+      background: var(--text-primary);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 12px 18px;
+      border-radius: var(--r-xl);
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      max-width: 92vw
+    }
+
+    /* ── HEATMAP MULTIVARIANTE ── */
+    .heatmap-cell {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--r-md);
+      color: var(--white);
+      transition: transform 0.2s, box-shadow 0.2s;
+      cursor: crosshair;
+      min-height: 50px;
+    }
+    .heatmap-cell:hover {
+      transform: scale(1.03);
+      box-shadow: var(--shadow-md);
+      z-index: 10;
+    }
+    .heatmap-label {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-tertiary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4px;
+    }
+    .heatmap-value {
+      font-size: clamp(16px, 2.5vw, 22px);
+      font-weight: 700;
+      font-family: 'DM Mono', monospace;
+      letter-spacing: -.03em;
+    }
+    .heatmap-sub {
+      font-size: 9px;
+      opacity: 0.8;
+      font-weight: 500;
+    }
+
+    /* ── SPINNER ── */
     @keyframes spin {
       from {
         transform: rotate(0deg)
@@ -1291,48 +1215,58 @@
       }
     }
 
-    /* RESPONSIVE */
+    /* ── RESPONSIVE ── */
     @media(max-width:1024px) {
-
-      .kpi-row,
-      .stats-row,
-      .insights-grid,
-      .recommend-top {
+      .kpi-grid {
         grid-template-columns: repeat(2, 1fr)
       }
 
-      .title-bar {
-        flex-direction: column
+      .recommend-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .insight-grid {
+        grid-template-columns: repeat(2, 1fr)
       }
     }
 
     @media(max-width:768px) {
-      html {
-        font-size: 14px
+      .nav {
+        padding: 0 16px
       }
 
-      .header {
-        padding: 0 1rem;
-        height: 56px
+      .hero {
+        padding: 24px 16px 20px
       }
 
-      .samplia-logo {
-        width: 76px
+      .main {
+        padding: 20px 16px 48px
       }
 
-      .title-bar {
-        padding: 1.25rem 1rem 1.5rem
+      .g2,
+      .g3 {
+        grid-template-columns: 1fr
       }
 
-      .content {
-        padding: 1rem
+      .g4 {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .photo-grid {
+        grid-template-columns: repeat(2, 1fr)
+      }
+
+      .stat-strip {
+        grid-template-columns: 1fr
+      }
+
+      .last-update {
+        display: none
       }
 
       .filter-bar {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 8px;
-        border-radius: var(--radius-lg)
+        border-radius: var(--r-xl);
+        top: 56px
       }
 
       .filter-sep {
@@ -1340,58 +1274,25 @@
       }
 
       .filter-select {
-        width: 100%
-      }
-
-      .grid-2,
-      .grid-3,
-      .recommend-top,
-      .recommend-legend {
-        grid-template-columns: 1fr
-      }
-
-      .grid-4 {
-        grid-template-columns: repeat(2, 1fr)
-      }
-
-      .last-update {
-        display: none
-      }
-
-      .photo-grid {
-        grid-template-columns: repeat(2, 1fr)
+        flex: 1
       }
     }
 
-    @media(max-width:480px) {
-
-      .kpi-row,
-      .stats-row {
+    @media(max-width:520px) {
+      .kpi-grid {
         grid-template-columns: 1fr
       }
 
-      .insights-grid {
+      .insight-grid {
         grid-template-columns: 1fr
       }
 
-      .grid-4 {
+      .recommend-grid {
         grid-template-columns: 1fr
       }
 
-      .footer {
-        flex-direction: column;
-        align-items: stretch
-      }
-
-      .footer-right {
-        flex-direction: column;
-        align-items: stretch;
-        width: 100%
-      }
-
-      .btn-primary {
-        width: 100%;
-        justify-content: center
+      .nps-legend-row {
+        grid-template-columns: repeat(3, 1fr)
       }
     }
   </style>
@@ -1400,53 +1301,57 @@
 <body>
   <div id="scrollProgress"></div>
 
-  <header class="header">
-    <img class="samplia-logo" src="https://samplia.com/assets/img/Samplia.svg" alt="Samplia" />
-    <div class="header-right">
-      <div class="live-pill">
+  <!-- NAV -->
+  <nav class="nav">
+    <img class="nav-logo" src="https://samplia.com/assets/img/Samplia.svg" alt="Samplia" />
+    <div class="nav-right">
+      <div class="live-badge">
         <div class="live-dot"></div>En vivo
       </div>
       <span class="last-update" id="lastUpdate">Cargando…</span>
     </div>
-  </header>
+  </nav>
 
-  <div class="title-bar">
-    <div class="title-left">
-      <div class="brand-title">Pascual Lateado</div>
-      <div class="title-sub">Resultados de encuesta a consumidores</div>
-    </div>
-    <div class="location-box">
-      <div class="location-line">
-        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
-          style="flex-shrink:0;margin-top:2px;opacity:.8">
-          <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-          <circle cx="12" cy="10" r="3" />
-        </svg>
-        <span><strong>Samplia X Shop Experience</strong> · CC Carrefour Gran Vía de Hortaleza, Madrid</span>
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-eyebrow">Resultados de encuesta · Samplia</div>
+        <div class="hero-title">Pascual Lateado</div>
+        <div class="hero-sub">Análisis de consumidores posterior al sampling</div>
       </div>
-      <div class="location-line">
-        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
-          style="flex-shrink:0;margin-top:2px;opacity:.8">
-          <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
-          <line x1="16" y1="2" x2="16" y2="6" />
-          <line x1="8" y1="2" x2="8" y2="6" />
-          <line x1="3" y1="10" x2="21" y2="10" />
-        </svg>
-        <span>Del <strong>12/03/2026</strong> al <strong>05/04/2026</strong></span>
+      <div class="hero-meta">
+        <div class="meta-row">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
+          <span><strong>Samplia X Shop</strong> · CC Carrefour Gran Vía de Hortaleza, Madrid</span>
+        </div>
+        <div class="meta-row">
+          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+            <line x1="16" y1="2" x2="16" y2="6" />
+            <line x1="8" y1="2" x2="8" y2="6" />
+            <line x1="3" y1="10" x2="21" y2="10" />
+          </svg>
+          <span>Del <strong>12/03/2026</strong> al <strong>05/04/2026</strong></span>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="content">
+  <!-- MAIN -->
+  <main class="main">
 
-    <!-- STAT CARDS -->
-    <div class="stats-row" style="margin-top:2.5rem;">
-      <div class="stat-card">
-        <div class="stat-icon-wrap">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- STAT STRIP -->
+    <div class="stat-strip" style="margin-bottom:12px;">
+      <div class="stat-strip-item">
+        <div class="stat-strip-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M20 12v10H4V12" />
             <path d="M2 7h20v5H2z" />
             <path d="M12 22V7" />
@@ -1454,146 +1359,92 @@
             <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z" />
           </svg>
         </div>
-        <div>
-          <div class="stat-label">Samplings entregados</div>
-          <div class="stat-value">22.095</div>
-        </div>
-        <div class="stat-sub">Total distribución</div>
+        <div class="stat-strip-label">Samplings entregados</div>
+        <div class="stat-strip-value">22.095</div>
+        <div class="stat-strip-sub">Total distribución</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-icon-wrap">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <div class="stat-strip-item">
+        <div class="stat-strip-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="8" cy="21" r="1" />
             <circle cx="19" cy="21" r="1" />
             <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
           </svg>
         </div>
-        <div>
-          <div class="stat-label">Ventas realizadas</div>
-          <div class="stat-value">544</div>
-        </div>
-        <div class="stat-sub">Durante la campaña</div>
+        <div class="stat-strip-label">Ventas realizadas</div>
+        <div class="stat-strip-value">544</div>
+        <div class="stat-strip-sub">Durante la campaña</div>
       </div>
-      <div class="stat-card">
-        <div class="stat-icon-wrap">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 2v20" />
-            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+      <div class="stat-strip-item">
+        <div class="stat-strip-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 10h12" />
+            <path d="M4 14h9" />
+            <path d="M19 6a7.7 7.7 0 0 0-5.2-2A7.9 7.9 0 0 0 6 12c0 4.4 3.5 8 7.8 8 2 0 3.8-.8 5.2-2" />
           </svg>
         </div>
-        <div>
-          <div class="stat-label">Facturación</div>
-          <div class="stat-value">808,51 €</div>
-        </div>
-        <div class="stat-sub">Ingresos generados</div>
+        <div class="stat-strip-label">Facturación</div>
+        <div class="stat-strip-value">808,51 €</div>
+        <div class="stat-strip-sub">Ingresos generados</div>
       </div>
     </div>
 
     <!-- KPI ROW -->
-    <div class="kpi-row" style="margin-top:1.5rem;">
-      <div class="kpi">
-        <div class="kpi-accent"></div>
-        <div class="kpi-icon-wrap">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
-            <circle cx="9" cy="7" r="4" />
-            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
-            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-          </svg>
-        </div>
+    <div class="kpi-grid" style="margin-bottom:12px;">
+      <div class="kpi-card">
+        <div class="kpi-card-bar" style="background:linear-gradient(90deg,var(--accent),#60a5fa);"></div>
         <div class="kpi-label">Encuestados</div>
         <div class="kpi-value" id="kpiTotal">—</div>
         <div class="kpi-sub" id="kpiTotalSub">— % de samplings</div>
       </div>
-      <div class="kpi" style="display:none;">
-        <div class="kpi-accent" style="background:linear-gradient(90deg,#005880,#0077a8);"></div>
-        <div class="kpi-icon-wrap" style="color:#005880;background:#e0f2fe;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
-            <circle cx="12" cy="12" r="3" />
-          </svg>
-        </div>
+      <div class="kpi-card" style="display:none;">
+        <div class="kpi-card-bar" style="background:linear-gradient(90deg,#005880,#0077a8);"></div>
         <div class="kpi-label">Conocimiento previo</div>
         <div class="kpi-value" id="kpiKnew">—</div>
         <div class="kpi-sub">Conocían Pascual Lateado</div>
       </div>
-      <div class="kpi">
-        <div class="kpi-accent" style="background:linear-gradient(90deg,#1a7a47,#4ade80);"></div>
-        <div class="kpi-icon-wrap" style="color:#1a7a47;background:#dcfce7;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
-            <path d="M3 6h18" />
-            <path d="M16 10a4 4 0 0 1-8 0" />
-          </svg>
-        </div>
+      <div class="kpi-card">
+        <div class="kpi-card-bar" style="background:linear-gradient(90deg,var(--green),#52c97b);"></div>
         <div class="kpi-label">Comprarían</div>
-        <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:2px;">
-          <div class="kpi-value" id="kpiCompra">—</div>
-          <div id="kpiBenchCompra"></div>
-        </div>
+        <div class="kpi-value" style="color:var(--green);" id="kpiCompra">—</div>
+        <div id="kpiBenchCompra"></div>
         <div class="kpi-sub">Seguro que sí + Probablemente sí</div>
       </div>
-      <div class="kpi">
-        <div class="kpi-accent" style="background:linear-gradient(90deg,#f59e0b,#fbbf24);"></div>
-        <div class="kpi-icon-wrap" style="color:#b45309;background:#fef3c7;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <polygon
-              points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-          </svg>
-        </div>
+      <div class="kpi-card">
+        <div class="kpi-card-bar" style="background:linear-gradient(90deg,var(--amber),#fbbf24);"></div>
         <div class="kpi-label">Valoración media</div>
-        <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:2px;">
-          <div class="kpi-value" id="kpiScore">—</div>
-          <div id="kpiBenchScore"></div>
-        </div>
+        <div class="kpi-value" style="color:var(--amber);" id="kpiScore">—</div>
+        <div id="kpiBenchScore"></div>
         <div class="kpi-sub">Escala 1–10</div>
       </div>
-      <div class="kpi">
-        <div class="kpi-accent" style="background:linear-gradient(90deg,#1a7a47,#4ade80);"></div>
-        <div class="kpi-icon-wrap" style="color:#1a7a47;background:#dcfce7;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M20 6 9 17l-5-5" />
-          </svg>
-        </div>
+      <div class="kpi-card">
+        <div class="kpi-card-bar" style="background:linear-gradient(90deg,var(--green),#52c97b);"></div>
         <div class="kpi-label">Valoración positiva</div>
-        <div class="kpi-value" id="kpiSaborPos">—</div>
+        <div class="kpi-value" style="color:var(--green);" id="kpiSaborPos">—</div>
         <div class="kpi-sub">Satisfechos + Muy satisfechos</div>
-      </div>
-      <div class="kpi" style="display:none;">
-        <div class="kpi-accent" style="background:linear-gradient(90deg,#8b1e2d,#c62828);"></div>
-        <div class="kpi-icon-wrap" style="color:#8b1e2d;background:#fee2e2;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M18 6 6 18" />
-            <path d="m6 6 12 12" />
-          </svg>
-        </div>
-        <div class="kpi-label">Insatisfechos</div>
-        <div class="kpi-value" id="kpiSaborNeg" style="color:#8b1e2d;">—</div>
-        <div class="kpi-sub">Valoraciones 1–4</div>
       </div>
     </div>
 
-    <!-- FILTER BAR -->
-    <div class="section-label" style="margin-top:2.5rem;">Demográficos</div>
-    <div class="filter-bar">
-      <span class="filter-label">Filtrar por</span>
+    <!-- DEMOGRAPHICS FILTER -->
+    <div class="section-header" style="margin-top:36px;">
+      <div class="section-dot"></div>
+      <div class="section-title">Demográficos</div>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="filter-bar" style="margin-bottom:16px;">
+      <span class="filter-label">Filtrar</span>
       <div class="filter-sep"></div>
-      <span class="filter-label" style="font-size:9.5px;">Género</span>
+      <span class="filter-label" style="font-size:9px;">Género</span>
       <select class="filter-select" id="fGender">
         <option value="">Todos</option>
         <option value="F">Femenino</option>
         <option value="M">Masculino</option>
       </select>
       <div class="filter-sep"></div>
-      <span class="filter-label" style="font-size:9.5px;">Edad</span>
+      <span class="filter-label" style="font-size:9px;">Edad</span>
       <select class="filter-select" id="fAge">
         <option value="">Todos</option>
         <option value="18-24">18–24</option>
@@ -1604,223 +1455,325 @@
         <option value="65+">65+</option>
       </select>
       <div class="filter-sep"></div>
-      <span class="filter-label" style="font-size:9.5px;">Sabor probado</span>
+      <span class="filter-label" style="font-size:9px;">Sabor</span>
       <select class="filter-select" id="fSabor">
         <option value="">Todos</option>
       </select>
     </div>
 
-    <!-- DEMOS CHARTS -->
-    <div class="grid-2" style="align-items:flex-start;">
+    <div class="g2" style="margin-bottom:12px;">
       <div class="card">
-        <div class="card-title">Distribución por género</div>
-        <div class="chart-wrap h230"><canvas id="chartGenero"></canvas></div>
+        <div class="card-inner">
+          <div class="card-header">
+            <div class="card-label">Distribución por género</div>
+          </div>
+          <div class="chart-wrap h220"><canvas id="chartGenero"></canvas></div>
+        </div>
       </div>
       <div class="card">
-        <div class="card-title">Distribución por rango de edad</div>
-        <div style="display:flex;gap:14px;align-items:flex-start;">
-          <div style="display:flex;flex-direction:column;gap:12px;min-width:95px;flex-shrink:0;">
+        <div class="card-inner">
+          <div class="card-header">
+            <div class="card-label">Distribución por rango de edad</div>
+          </div>
+          <div style="display:flex;gap:12px;align-items:flex-start;">
+            <div style="display:flex;flex-direction:column;gap:8px;min-width:90px;flex-shrink:0;">
+              <div class="mini-stat">
+                <div class="mini-label">Edad media</div>
+                <div class="mini-value blue" id="edadMediaValue">—</div>
+              </div>
+              <div class="mini-stat">
+                <div class="mini-label">Moda</div>
+                <div class="mini-value blue" id="edadModaValue">—</div>
+              </div>
+            </div>
+            <div class="chart-wrap h220" style="flex:1;min-width:0;"><canvas id="chartEdad"></canvas></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCT EXPERIENCE -->
+    <div class="section-header">
+      <div class="section-dot"></div>
+      <div class="section-title">Experiencia con el producto</div>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="g2" style="margin-bottom:12px;">
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-header">
+            <div class="card-label">Variedad probada</div>
+            <div class="card-question">¿Qué variedad de Pascual Lateado has probado con Samplia?</div>
+          </div>
+          <div class="chart-wrap h260" style="margin-top:12px;"><canvas id="chartSabor"></canvas></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-header">
+            <div class="card-label">Interés en más sabores</div>
+            <div class="card-question">¿Le interesaría probar más sabores?</div>
+          </div>
+          <div class="mini-grid" style="grid-template-columns:repeat(5,1fr);">
             <div class="mini-stat">
-              <div class="mini-stat-label">Edad media</div>
-              <div class="mini-stat-value" id="edadMediaValue">—</div>
+              <div class="mini-label">Baja</div>
+              <div class="mini-value red" id="mMasSabBaja">—</div>
             </div>
             <div class="mini-stat">
-              <div class="mini-stat-label">Edad moda</div>
-              <div class="mini-stat-value" id="edadModaValue">—</div>
+              <div class="mini-label">Neutr.</div>
+              <div class="mini-value muted" id="mMasSabNeutro">—</div>
+            </div>
+            <div class="mini-stat">
+              <div class="mini-label">Alta</div>
+              <div class="mini-value light-blue" id="mMasSabAlta">—</div>
+            </div>
+            <div class="mini-stat">
+              <div class="mini-label">Muy alta</div>
+              <div class="mini-value blue" id="mMasSabMuyAlta">—</div>
+            </div>
+            <div class="mini-stat">
+              <div class="mini-label">Media</div>
+              <div class="mini-value blue" id="mMasSabMean">—</div>
             </div>
           </div>
-          <div class="chart-wrap h230" style="flex:1;min-width:0;"><canvas id="chartEdad"></canvas></div>
+          <div class="chart-wrap h180"><canvas id="chartMasSabores"></canvas></div>
+          <div class="chart-note" id="masSaboresNote"></div>
         </div>
       </div>
     </div>
 
-    <!-- EXPERIENCIA CON EL PRODUCTO -->
-    <div class="section-label">Experiencia con el producto</div>
-
-    <!-- SABOR PROBADO + MÁS SABORES -->
-    <div class="grid-2">
+    <div class="g2" style="margin-bottom:12px;">
       <div class="card">
-        <div class="card-title">¿Qué variedad de Pascual Lateado has probado con Samplia?</div>
-        <div class="chart-wrap h255" style="margin-top:1rem;"><canvas id="chartSabor"></canvas></div>
+        <div class="card-inner">
+          <div class="card-header">
+            <div class="card-label">Momento de consumo actual</div>
+            <div class="card-question">¿En qué momento del día has consumido Pascual Lateado?</div>
+          </div>
+          <div class="chart-wrap h260"><canvas id="chartMomentoConsumo"></canvas></div>
+        </div>
       </div>
       <div class="card">
-        <div class="card-title">¿Le interesaría probar más sabores?</div>
-        <div class="grid-4" id="masSaboresStats"
-          style="grid-template-columns:repeat(5,minmax(0,1fr));margin-bottom:.75rem;">
-          <div class="mini-stat">
-            <div class="mini-stat-label">Baja</div>
-            <div class="mini-stat-value red" id="mMasSabBaja">—</div>
+        <div class="card-inner">
+          <div class="card-header">
+            <div class="card-label">Momento de consumo futuro</div>
+            <div class="card-question">¿En qué momento del día consumiría Pascual Lateado?</div>
           </div>
-          <div class="mini-stat">
-            <div class="mini-stat-label">Neutrales</div>
-            <div class="mini-stat-value light-gray" id="mMasSabNeutro">—</div>
-          </div>
-          <div class="mini-stat">
-            <div class="mini-stat-label">Alta</div>
-            <div class="mini-stat-value green-gradient" id="mMasSabAlta">—</div>
-          </div>
-          <div class="mini-stat">
-            <div class="mini-stat-label">Muy alta</div>
-            <div class="mini-stat-value green" id="mMasSabMuyAlta">—</div>
-          </div>
-          <div class="mini-stat">
-            <div class="mini-stat-label">Media</div>
-            <div class="mini-stat-value blue" id="mMasSabMean">—</div>
-          </div>
+          <div class="chart-wrap h260"><canvas id="chartMomentoConsumiria"></canvas></div>
         </div>
-        <div class="chart-wrap h255"><canvas id="chartMasSabores"></canvas></div>
-        <div class="chart-note" id="masSaboresNote"></div>
       </div>
     </div>
 
-    <!-- MOMENTO DE CONSUMO -->
-    <div class="grid-2">
-      <div class="card">
-        <div class="card-title">¿En qué momento del día has consumido Pascual Lateado?</div>
-        <div class="chart-wrap h255"><canvas id="chartMomentoConsumo"></canvas></div>
-      </div>
-      <div class="card">
-        <div class="card-title">¿En qué momento del día consumiría Pascual Lateado?</div>
-        <div class="chart-wrap h255"><canvas id="chartMomentoConsumiria"></canvas></div>
+    <div class="card" style="margin-bottom:12px;">
+      <div class="card-inner">
+        <div class="card-header">
+          <div class="card-label">Captación en punto de venta</div>
+          <div class="card-question">¿Qué tan probable es que este producto capte tu atención si lo ves en el punto de
+            venta?</div>
+        </div>
+        <div class="mini-grid" style="grid-template-columns:repeat(5,1fr);margin-bottom:12px;">
+          <div class="mini-stat">
+            <div class="mini-label">Baja (1–4)</div>
+            <div class="mini-value red" id="mAtencionInsat">—</div>
+          </div>
+          <div class="mini-stat">
+            <div class="mini-label">Neutral (5–6)</div>
+            <div class="mini-value muted" id="mAtencionNeu">—</div>
+          </div>
+          <div class="mini-stat">
+            <div class="mini-label">Alta (7–8)</div>
+            <div class="mini-value light-blue" id="mAtencionSat">—</div>
+          </div>
+          <div class="mini-stat">
+            <div class="mini-label">Muy alta (9–10)</div>
+            <div class="mini-value blue" id="mAtencionMuySat">—</div>
+          </div>
+          <div class="mini-stat">
+            <div class="mini-label">Media</div>
+            <div class="mini-value blue" id="mAtencionMean">—</div>
+          </div>
+        </div>
+        <div class="chart-wrap h180" id="atencionWrap"><canvas id="chartAtencion"></canvas></div>
+        <div class="chart-note" id="atencionNote"></div>
       </div>
     </div>
 
-    <!-- ATENCIÓN EN PDV -->
-    <div class="card" style="margin-bottom:14px;">
-      <div class="card-title">¿Qué tan probable es que este producto capte tu atención si lo ves en el punto de venta?
+    <div class="card" style="margin-bottom:12px;">
+      <div class="card-inner">
+        <div class="card-header">
+          <div class="card-label">Valoración del sabor</div>
+          <div class="card-question">En general, ¿qué te ha parecido su sabor?</div>
+        </div>
+        <div class="mini-grid" style="grid-template-columns:repeat(5,1fr);margin-bottom:12px;">
+          <div class="mini-stat">
+            <div class="mini-label">Insatisfechos</div>
+            <div class="mini-value red" id="mSaborBaja">—</div>
+          </div>
+          <div class="mini-stat">
+            <div class="mini-label">Neutral (5–6)</div>
+            <div class="mini-value muted" id="mSaborNeutro">—</div>
+          </div>
+          <div class="mini-stat">
+            <div class="mini-label">Satisfechos</div>
+            <div class="mini-value light-blue" id="mSaborAlta">—</div>
+          </div>
+          <div class="mini-stat">
+            <div class="mini-label">Muy satis.</div>
+            <div class="mini-value blue" id="mSaborMuyAlta">—</div>
+          </div>
+          <div class="mini-stat">
+            <div class="mini-label">Media</div>
+            <div class="mini-value blue" id="mSaborMean">—</div>
+          </div>
+        </div>
+        <div class="chart-wrap h180"><canvas id="chartSaborGeneral"></canvas></div>
+        <div class="chart-note" id="saborGeneralNote"></div>
       </div>
-      <div class="grid-4" style="grid-template-columns:repeat(5,minmax(0,1fr));margin-bottom:.75rem;">
-        <div class="mini-stat">
-          <div class="mini-stat-label">Baja (1–4)</div>
-          <div class="mini-stat-value red" id="mAtencionInsat">—</div>
-        </div>
-        <div class="mini-stat">
-          <div class="mini-stat-label">Neutrales (5–6)</div>
-          <div class="mini-stat-value light-gray" id="mAtencionNeu">—</div>
-        </div>
-        <div class="mini-stat">
-          <div class="mini-stat-label">Alta (7–8)</div>
-          <div class="mini-stat-value green-gradient" id="mAtencionSat">—</div>
-        </div>
-        <div class="mini-stat">
-          <div class="mini-stat-label">Muy alta (9–10)</div>
-          <div class="mini-stat-value green" id="mAtencionMuySat">—</div>
-        </div>
-        <div class="mini-stat">
-          <div class="mini-stat-label">Media</div>
-          <div class="mini-stat-value blue" id="mAtencionMean">—</div>
-        </div>
-      </div>
-      <div class="chart-wrap h180" id="atencionWrap"><canvas id="chartAtencion"></canvas></div>
-      <div class="chart-note" id="atencionNote"></div>
-    </div>
-
-    <!-- SABOR GENERAL -->
-    <div class="card" style="margin-bottom:14px;">
-      <div class="card-title">En general, ¿qué te ha parecido su sabor?</div>
-      <div class="grid-4" id="saborGeneralStats"
-        style="grid-template-columns:repeat(5,minmax(0,1fr));margin-bottom:.75rem;">
-        <div class="mini-stat">
-          <div class="mini-stat-label">Insatisfechos</div>
-          <div class="mini-stat-value red" id="mSaborBaja">—</div>
-        </div>
-        <div class="mini-stat">
-          <div class="mini-stat-label">Neutrales (5–6)</div>
-          <div class="mini-stat-value light-gray" id="mSaborNeutro">—</div>
-        </div>
-        <div class="mini-stat">
-          <div class="mini-stat-label">Satisfechos</div>
-          <div class="mini-stat-value green-gradient" id="mSaborAlta">—</div>
-        </div>
-        <div class="mini-stat">
-          <div class="mini-stat-label">Muy Satisfechos</div>
-          <div class="mini-stat-value green" id="mSaborMuyAlta">—</div>
-        </div>
-        <div class="mini-stat">
-          <div class="mini-stat-label">Media</div>
-          <div class="mini-stat-value blue" id="mSaborMean">—</div>
-        </div>
-      </div>
-      <div class="chart-wrap h180"><canvas id="chartSaborGeneral"></canvas></div>
-      <div class="chart-note" id="saborGeneralNote"></div>
     </div>
 
     <!-- FRASES DE ACUERDO -->
-    <div class="card" style="margin-bottom:14px;">
-      <div class="card-title">Ahora, pensando en el Pascual Lateado que has consumido gratis con Samplia, ¿Cuán de
-        acuerdo estás con las siguientes frases?</div>
-      <div id="frasesContainer" class="grid-3" style="margin-bottom:0;"></div>
+    <div class="card" style="margin-bottom:12px;">
+      <div class="card-inner">
+        <div class="card-header">
+          <div class="card-label">Percepción del producto</div>
+          <div class="card-question">Pensando en el Pascual Lateado que has consumido gratis con Samplia, ¿cuán de
+            acuerdo estás con las siguientes frases?</div>
+        </div>
+        <div id="frasesContainer" class="g3" style="margin-bottom:0;"></div>
+      </div>
     </div>
 
-    <!-- INTENCIÓN DE COMPRA -->
-    <div class="section-label">Intención de compra</div>
-    <div class="grid-2">
+    <!-- PURCHASE INTENT -->
+    <div class="section-header" style="margin-top:36px;">
+      <div class="section-dot"></div>
+      <div class="section-title">Intención de compra</div>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="g2" style="margin-bottom:12px;">
       <div class="card">
-        <div class="card-title">Luego de haberlo probado, ¿Lo comprarías a un precio de 1,49€?</div>
-        <div style="display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;">
-          <div class="chart-wrap h255" style="flex:1;min-width:170px;"><canvas id="chartCompra"></canvas></div>
-          <div class="mini-stat" style="min-width:120px;margin-top:18px;">
-            <div class="mini-stat-label">Compradores Potenciales</div>
-            <div class="mini-stat-value blue" id="mCompraPotencial">—</div>
-            <div id="mCompraBench" style="margin-top:6px;"></div>
+        <div class="card-inner">
+          <div class="card-header">
+            <div class="card-label">¿Lo comprarías a 1,49€?</div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:12px;flex-wrap:wrap;">
+            <div class="chart-wrap h260" style="flex:1;min-width:150px;"><canvas id="chartCompra"></canvas></div>
+            <div style="min-width:110px;display:flex;flex-direction:column;gap:8px;margin-top:16px;">
+              <div class="mini-stat">
+                <div class="mini-label">Compradores potenciales</div>
+                <div class="mini-value blue" id="mCompraPotencial">—</div>
+                <div id="mCompraBench" style="margin-top:4px;"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
       <div class="card">
-        <div class="card-title">¿Por qué razón no lo comprarías?</div>
-        <div class="chart-wrap h255"><canvas id="chartNoCompra"></canvas></div>
+        <div class="card-inner">
+          <div class="card-header">
+            <div class="card-label">Razones para no comprar</div>
+            <div class="card-question">¿Por qué razón no lo comprarías?</div>
+          </div>
+          <div class="chart-wrap h260"><canvas id="chartNoCompra"></canvas></div>
+        </div>
       </div>
     </div>
 
-    <!-- RECOMENDACIÓN -->
-    <div class="section-label">Intención de recomendación</div>
-    <div class="card" style="margin-bottom:14px;">
-      <div class="card-title">Por último ¿Recomendarías Pascual Lateado a un familiar o amigo?</div>
-      <div class="recommend-wrap" style="margin-top:.75rem;">
-        <div class="recommend-top">
-          <div class="recommend-hero">
-            <div class="recommend-hero-label" id="npsLabel">Recomendarían el producto</div>
-            <div class="recommend-hero-value" id="npsValue">—</div>
-            <div class="recommend-hero-sub" id="npsHeroSub">—</div>
+    <!-- ANÁLISIS MULTIVARIANTE -->
+    <div class="section-header">
+      <div class="section-dot"></div>
+      <div class="section-title">Análisis Predictivo y Multivariante</div>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="g2" style="margin-bottom:12px;">
+      <!-- GRÁFICO 1: BURBUJAS (POSICIONAMIENTO) -->
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-header">
+            <div class="card-label">Matriz de Nichos: Sabor vs. Atención por Edad</div>
+            <div class="card-question">Tamaño de burbuja = Volumen de usuarios. Identifica el "Sweet Spot".</div>
           </div>
-          <div class="recommend-stat">
-            <div class="recommend-stat-label">Promotores</div>
-            <div class="recommend-stat-value blue" id="npsPromoters">—</div>
-            <div class="recommend-stat-sub" id="npsPromotersSub">—</div>
-          </div>
-          <div class="recommend-stat">
-            <div class="recommend-stat-label">Pasivos</div>
-            <div class="recommend-stat-value gray" id="npsPassives">—</div>
-            <div class="recommend-stat-sub" id="npsPassivesSub">—</div>
-          </div>
-          <div class="recommend-stat">
-            <div class="recommend-stat-label">Detractores</div>
-            <div class="recommend-stat-value red" id="npsDetractors">—</div>
-            <div class="recommend-stat-sub" id="npsDetractorsSub">—</div>
+          <div class="chart-wrap h300">
+            <canvas id="chartBubbleNichos"></canvas>
           </div>
         </div>
-        <div class="recommend-band">
-          <div class="recommend-band-top">
-            <div class="recommend-band-title" id="npsBandTitle">Distribución de recomendación</div>
-            <div class="recommend-band-note" id="npsBandNote">—</div>
+      </div>
+
+      <!-- GRÁFICO 2: HEATMAP (DRIVERS DE COMPRA) -->
+      <div class="card">
+        <div class="card-inner">
+          <div class="card-header">
+            <div class="card-label">Drivers de Compra: Sabor vs. Impacto Visual</div>
+            <div class="card-question">% de Intención de Compra según la combinación de ambas variables.</div>
           </div>
-          <div class="recommend-band-bar">
-            <div class="recommend-band-seg det" id="npsBarDet" style="width:0%"></div>
-            <div class="recommend-band-seg pas" id="npsBarPas" style="width:0%"></div>
-            <div class="recommend-band-seg pro" id="npsBarPro" style="width:0%"></div>
+          <!-- Contenedor del Heatmap CSS -->
+          <div id="heatmapCompra" style="display: grid; grid-template-columns: 80px repeat(3, 1fr); gap: 4px; height: clamp(200px, 34vw, 300px); align-items: stretch; margin-top: 16px;">
+            <!-- Renderizado dinámico vía JS -->
           </div>
-          <div class="recommend-legend">
-            <div class="recommend-legend-item">
-              <div class="recommend-legend-value det" id="npsLegDet">—</div>
-              <div class="recommend-legend-label" id="npsLegDetLabel">Detractores</div>
+          <div class="chart-note" style="margin-top: 12px;">Eje X: Sabor General | Eje Y: Atención PDV</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RECOMMENDATION -->
+    <div class="section-header">
+      <div class="section-dot"></div>
+      <div class="section-title">Intención de recomendación</div>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="card" style="margin-bottom:12px;">
+      <div class="card-inner">
+        <div class="card-header">
+          <div class="card-label">¿Recomendarías Pascual Lateado a un familiar o amigo?</div>
+        </div>
+        <div style="margin-top:4px;">
+          <div class="recommend-grid">
+            <div class="nps-hero">
+              <div class="nps-hero-label" id="npsLabel">Recomendarían el producto</div>
+              <div class="nps-hero-value" id="npsValue">—</div>
+              <div class="nps-hero-sub" id="npsHeroSub">—</div>
             </div>
-            <div class="recommend-legend-item">
-              <div class="recommend-legend-value pas" id="npsLegPas">—</div>
-              <div class="recommend-legend-label" id="npsLegPasLabel">Pasivos</div>
+            <div class="nps-stat-card">
+              <div class="nps-stat-label">Promotores</div>
+              <div class="nps-stat-value" style="color:var(--accent);" id="npsPromoters">—</div>
+              <div class="nps-stat-sub" id="npsPromotersSub">—</div>
             </div>
-            <div class="recommend-legend-item">
-              <div class="recommend-legend-value pro" id="npsLegPro">—</div>
-              <div class="recommend-legend-label" id="npsLegProLabel">Promotores</div>
+            <div class="nps-stat-card">
+              <div class="nps-stat-label">Pasivos</div>
+              <div class="nps-stat-value" style="color:var(--text-tertiary);" id="npsPassives">—</div>
+              <div class="nps-stat-sub" id="npsPassivesSub">—</div>
+            </div>
+            <div class="nps-stat-card">
+              <div class="nps-stat-label">Detractores</div>
+              <div class="nps-stat-value" style="color:var(--red);" id="npsDetractors">—</div>
+              <div class="nps-stat-sub" id="npsDetractorsSub">—</div>
+            </div>
+          </div>
+          <div class="nps-bar-section" style="margin-top:10px;">
+            <div class="nps-bar-header">
+              <div class="nps-bar-title" id="npsBandTitle">Distribución</div>
+              <div class="nps-bar-note" id="npsBandNote">—</div>
+            </div>
+            <div class="nps-bar">
+              <div class="nps-det" id="npsBarDet" style="width:0%"></div>
+              <div class="nps-pas" id="npsBarPas" style="width:0%"></div>
+              <div class="nps-pro" id="npsBarPro" style="width:0%"></div>
+            </div>
+            <div class="nps-legend-row">
+              <div class="nps-leg-item">
+                <div class="nps-leg-value det" id="npsLegDet">—</div>
+                <div class="nps-leg-label" id="npsLegDetLabel">Detractores</div>
+              </div>
+              <div class="nps-leg-item">
+                <div class="nps-leg-value pas" id="npsLegPas">—</div>
+                <div class="nps-leg-label" id="npsLegPasLabel">Pasivos</div>
+              </div>
+              <div class="nps-leg-item">
+                <div class="nps-leg-value pro" id="npsLegPro">—</div>
+                <div class="nps-leg-label" id="npsLegProLabel">Promotores</div>
+              </div>
             </div>
           </div>
         </div>
@@ -1828,12 +1781,17 @@
     </div>
 
     <!-- INSIGHTS -->
-    <div class="section-label">Insights de negocio</div>
-    <div class="insights-grid">
+    <div class="section-header">
+      <div class="section-dot"></div>
+      <div class="section-title">Insights de negocio</div>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="insight-grid" style="margin-bottom:12px;">
       <div class="insight-card">
         <div class="insight-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
             <path d="M3 6h18" />
             <path d="M16 10a4 4 0 0 1-8 0" />
@@ -1844,8 +1802,8 @@
       </div>
       <div class="insight-card" style="display:none;">
         <div class="insight-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <polygon
               points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
           </svg>
@@ -1855,8 +1813,8 @@
       </div>
       <div class="insight-card">
         <div class="insight-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <circle cx="12" cy="12" r="10" />
             <path d="M12 8v4l3 3" />
           </svg>
@@ -1866,8 +1824,8 @@
       </div>
       <div class="insight-card">
         <div class="insight-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
             <circle cx="9" cy="7" r="4" />
             <polyline points="16 11 18 13 22 9" />
@@ -1876,82 +1834,103 @@
         <div class="insight-title">Recomendación</div>
         <div class="insight-body" id="insightNps">—</div>
       </div>
+      <div class="insight-card">
+        <div class="insight-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+            <circle cx="12" cy="12" r="3" />
+          </svg>
+        </div>
+        <div class="insight-title">Sweet Spot Demográfico</div>
+        <div class="insight-body" id="insightSweetSpot">—</div>
+      </div>
     </div>
 
     <!-- MEDIA -->
-    <div class="section-label">Media</div>
-    <div class="card" style="margin-bottom:14px;">
-      <div class="card-title">Video de la campaña</div>
-      <div class="photo-card" style="aspect-ratio:16/9; max-width:800px; margin:0 auto;"
-        onclick="window.open('https://youtu.be/W0TNR-QdZ6s', '_blank')">
-        <img src="https://img.youtube.com/vi/W0TNR-QdZ6s/maxresdefault.jpg" alt="Video de la campaña">
-        <div class="zoom-overlay" style="background:rgba(0,24,43,0.15); opacity:1;">
-          <div class="zoom-btn" style="opacity:1; transform:scale(1); width:64px; height:64px; background:white;">
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor"
-              style="margin-left:4px; color:var(--primary);">
-              <path d="M8 5v14l11-7z" />
-            </svg>
+    <div class="section-header">
+      <div class="section-dot"></div>
+      <div class="section-title">Vídeo de la campaña</div>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="card" style="margin-bottom:12px;">
+      <div class="card-inner">
+        <div class="card-label" style="margin-bottom:12px;">Video de la campaña</div>
+        <div class="photo-card" style="aspect-ratio:16/9;max-width:760px;margin:0 auto;"
+          onclick="window.open('https://youtu.be/W0TNR-QdZ6s','_blank')">
+          <img src="https://img.youtube.com/vi/W0TNR-QdZ6s/maxresdefault.jpg" alt="Video de la campaña">
+          <div class="zoom-overlay" style="background:rgba(0,0,0,.12);opacity:1;">
+            <div class="zoom-btn" style="opacity:1;transform:scale(1);width:54px;height:54px;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="currentColor"
+                style="margin-left:3px;">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="card" style="margin-bottom:14px;">
-      <div class="card-title">Fotos de la campaña</div>
-      <div class="photo-grid">
-        <div class="photo-card"
-          onclick="openLightbox('https://lh3.googleusercontent.com/d/1Wj97ofFWNugmvNFiWtSmb2SeB1s47AA6')">
-          <img src="https://lh3.googleusercontent.com/d/1Wj97ofFWNugmvNFiWtSmb2SeB1s47AA6"
-            alt="Campaña Pascual Lateado 1" loading="lazy">
-          <div class="zoom-overlay">
-            <div class="zoom-btn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="11" cy="11" r="8" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                <line x1="11" y1="8" x2="11" y2="14" />
-                <line x1="8" y1="11" x2="14" y2="11" />
-              </svg></div>
+
+    <div class="card" style="margin-bottom:12px;">
+      <div class="card-inner">
+        <div class="card-label" style="margin-bottom:12px;">Fotos de la campaña</div>
+        <div class="photo-grid">
+          <div class="photo-card"
+            onclick="openLightbox('https://lh3.googleusercontent.com/d/1Wj97ofFWNugmvNFiWtSmb2SeB1s47AA6')">
+            <img src="https://lh3.googleusercontent.com/d/1Wj97ofFWNugmvNFiWtSmb2SeB1s47AA6" alt="Campaña 1"
+              loading="lazy">
+            <div class="zoom-overlay">
+              <div class="zoom-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                  <line x1="11" y1="8" x2="11" y2="14" />
+                  <line x1="8" y1="11" x2="14" y2="11" />
+                </svg></div>
+            </div>
           </div>
-        </div>
-        <div class="photo-card"
-          onclick="openLightbox('https://lh3.googleusercontent.com/d/11Og6v9dAp-qUuu33nJQFygVNAU-TgYeG')">
-          <img src="https://lh3.googleusercontent.com/d/11Og6v9dAp-qUuu33nJQFygVNAU-TgYeG"
-            alt="Campaña Pascual Lateado 2" loading="lazy">
-          <div class="zoom-overlay">
-            <div class="zoom-btn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="11" cy="11" r="8" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                <line x1="11" y1="8" x2="11" y2="14" />
-                <line x1="8" y1="11" x2="14" y2="11" />
-              </svg></div>
+          <div class="photo-card"
+            onclick="openLightbox('https://lh3.googleusercontent.com/d/11Og6v9dAp-qUuu33nJQFygVNAU-TgYeG')">
+            <img src="https://lh3.googleusercontent.com/d/11Og6v9dAp-qUuu33nJQFygVNAU-TgYeG" alt="Campaña 2"
+              loading="lazy">
+            <div class="zoom-overlay">
+              <div class="zoom-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                  <line x1="11" y1="8" x2="11" y2="14" />
+                  <line x1="8" y1="11" x2="14" y2="11" />
+                </svg></div>
+            </div>
           </div>
-        </div>
-        <div class="photo-card"
-          onclick="openLightbox('https://lh3.googleusercontent.com/d/1gP46E06gdB-UPg45tVArv8zFBOqUWX8G')">
-          <img src="https://lh3.googleusercontent.com/d/1gP46E06gdB-UPg45tVArv8zFBOqUWX8G"
-            alt="Campaña Pascual Lateado 3" loading="lazy">
-          <div class="zoom-overlay">
-            <div class="zoom-btn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="11" cy="11" r="8" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                <line x1="11" y1="8" x2="11" y2="14" />
-                <line x1="8" y1="11" x2="14" y2="11" />
-              </svg></div>
+          <div class="photo-card"
+            onclick="openLightbox('https://lh3.googleusercontent.com/d/1gP46E06gdB-UPg45tVArv8zFBOqUWX8G')">
+            <img src="https://lh3.googleusercontent.com/d/1gP46E06gdB-UPg45tVArv8zFBOqUWX8G" alt="Campaña 3"
+              loading="lazy">
+            <div class="zoom-overlay">
+              <div class="zoom-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                  <line x1="11" y1="8" x2="11" y2="14" />
+                  <line x1="8" y1="11" x2="14" y2="11" />
+                </svg></div>
+            </div>
           </div>
-        </div>
-        <div class="photo-card"
-          onclick="openLightbox('https://lh3.googleusercontent.com/d/1Gc4_K8PY1kIgcOgJ23qR_FeaqdwLM774')">
-          <img src="https://lh3.googleusercontent.com/d/1Gc4_K8PY1kIgcOgJ23qR_FeaqdwLM774"
-            alt="Campaña Pascual Lateado 4" loading="lazy">
-          <div class="zoom-overlay">
-            <div class="zoom-btn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
-                fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="11" cy="11" r="8" />
-                <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                <line x1="11" y1="8" x2="11" y2="14" />
-                <line x1="8" y1="11" x2="14" y2="11" />
-              </svg></div>
+          <div class="photo-card"
+            onclick="openLightbox('https://lh3.googleusercontent.com/d/1Gc4_K8PY1kIgcOgJ23qR_FeaqdwLM774')">
+            <img src="https://lh3.googleusercontent.com/d/1Gc4_K8PY1kIgcOgJ23qR_FeaqdwLM774" alt="Campaña 4"
+              loading="lazy">
+            <div class="zoom-overlay">
+              <div class="zoom-btn"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"
+                  fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="11" cy="11" r="8" />
+                  <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                  <line x1="11" y1="8" x2="11" y2="14" />
+                  <line x1="8" y1="11" x2="14" y2="11" />
+                </svg></div>
+            </div>
           </div>
         </div>
       </div>
@@ -1959,28 +1938,25 @@
 
     <!-- FOOTER -->
     <div class="footer">
-      <span class="footer-info" id="footerInfo">Total encuestados: — · Campaña 12/03/2026 – 05/04/2026 · se refresca
-        cada 24 h</span>
-      <div class="footer-right">
-        <button class="btn-primary" id="downloadPdfBtn">
-          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
-            stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
-            style="flex-shrink:0">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-            <polyline points="7 10 12 15 17 10" />
-            <line x1="12" y1="15" x2="12" y2="3" />
-          </svg>
-          Descargar PDF
-        </button>
-      </div>
+      <span class="footer-info" id="footerInfo">Total encuestados: — · Campaña 12/03/2026 – 05/04/2026</span>
+      <button class="btn-primary" id="downloadPdfBtn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+          <polyline points="7 10 12 15 17 10" />
+          <line x1="12" y1="15" x2="12" y2="3" />
+        </svg>
+        Descargar PDF
+      </button>
     </div>
-  </div>
+
+  </main>
 
   <!-- LIGHTBOX -->
   <div id="lightbox" class="lightbox">
     <div class="lightbox-content">
       <button class="lightbox-close" onclick="closeLightbox()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
           <line x1="18" y1="6" x2="6" y2="18" />
           <line x1="6" y1="6" x2="18" y2="18" />
@@ -1998,26 +1974,24 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
   <script>
-    Chart.defaults.font.family = "'Manrope', sans-serif";
+    Chart.defaults.font.family = "'Poppins', sans-serif";
 
     // ── CONFIG ──────────────────────────────────────────────────────
     const GSHEET_URL = 'https://docs.google.com/spreadsheets/d/17p2A1teUbtoIj9_XlobCLCbNJ7i8zLU26A7OMvvCKN0/gviz/tq?tqx=out:json&gid=310445005';
     const TOTAL_SAMPLINGS = 22095;
     const BENCH_COMPRA = 42;
-    const BENCH_SCORE = 8.0;
+    const BENCH_SCORE = 7.2;
     let allRows = [], allHeaders = [], charts = {};
 
-    const AZURE = ['#004a84', '#0060a8', '#1a7ac4', '#4499d4', '#7ab8e2', '#b0d4ef'];
-    const CORAL = ['#a83200', '#c84200', '#e06020', '#e88050', '#f0a880', '#f8d0b8'];
-    const MIXED = ['#0060a8', '#c84200', '#1a7ac4', '#a83200', '#4499d4', '#e06020', '#7ab8e2', '#e88050', '#004a84', '#c84200'];
-    const LIKERT = { 'totalmente de acuerdo': '#1a7a47', 'de acuerdo': '#9CCC65', 'ni de acuerdo ni en desacuerdo': '#f59e0b', 'en desacuerdo': '#e06272', 'totalmente en desacuerdo': '#c62828' };
+    const AZURE = ['#0066ff', '#3385ff', '#4d94ff', '#6ba3ff', '#99bbff', '#c2d8ff'];
+    const CORAL = ['#cc4400', '#e05500', '#f06030', '#f08060', '#f5a080', '#fad0c0'];
+    const MIXED = ['#0066ff', '#cc4400', '#3385ff', '#bb3300', '#6ba3ff', '#e06030', '#99bbff', '#f08060', '#0044bb', '#cc5522'];
+    const LIKERT = { 'totalmente de acuerdo': '#00875a', 'de acuerdo': '#52c97b', 'ni de acuerdo ni en desacuerdo': '#d97706', 'en desacuerdo': '#f0a0a0', 'totalmente en desacuerdo': '#c0392b' };
 
     // ── COLUMN INDEX MAP ────────────────────────────────────────────
     let CI = {
-      gender: -1, age: 14,           // column O (index 14, forced by user)
-      sabor: 7,          // column H (index 7, forced by user)
-      conocia: -1,
-      momentoConsumo: -1, momentoConsumiria: -1,
+      gender: -1, age: 14, sabor: 7,
+      conocia: -1, momentoConsumo: -1, momentoConsumiria: -1,
       atencionPdv: -1, saborGeneral: -1, masSabores: -1,
       compra: -1, noCompra: -1, nps: -1, score: -1,
       frasesAcuerdo: []
@@ -2028,6 +2002,22 @@
     function pct(n, t) { return t > 0 ? Math.round(n / t * 100) : 0; }
     function norm(v) { return (v || '').toString().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^\w\s,.]/g, ' ').toLowerCase().replace(/\s+/g, ' ').trim(); }
     function getCol(rows, idx) { return idx >= 0 ? rows.map(r => (r[idx] || '').toString().trim()).filter(v => v !== '') : []; }
+
+    function getSaborColor(sabor) {
+      const l = norm(sabor);
+      if (l.includes('natural')) return '#00959C';
+      if (l.includes('cacao')) return '#454545';
+      if (l.includes('cafe')) return '#DF7A42';
+      return AZURE[0];
+    }
+
+    function hexToRgb(hex) {
+      if (!hex.startsWith('#') || hex.length !== 7) return '0, 102, 255';
+      const r = parseInt(hex.substring(1,3), 16);
+      const g = parseInt(hex.substring(3,5), 16);
+      const b = parseInt(hex.substring(5,7), 16);
+      return `${r}, ${g}, ${b}`;
+    }
     function sortedEntries(map, max = 12) { return Object.entries(map).sort((a, b) => b[1] - a[1]).slice(0, max); }
     function countSingle(arr) { const m = {}; arr.forEach(v => { const k = v.trim(); if (k) m[k] = (m[k] || 0) + 1; }); return m; }
     function countMulti(rows, idx) { const m = {}; if (idx < 0) return m; rows.forEach(r => { (r[idx] || '').toString().split(/[,;]+/).forEach(v => { const k = v.trim(); if (k) m[k] = (m[k] || 0) + 1; }); }); return m; }
@@ -2039,25 +2029,24 @@
       if (direct) return direct;
       const n = parseInt(v);
       if (isNaN(n) || n < 18) return null;
-      if (n <= 24) return '18-24'; if (n <= 34) return '25-34'; if (n <= 44) return '35-44';
-      if (n <= 54) return '45-54'; if (n <= 64) return '55-64'; return '65+';
-    }
-
-    function wrapLabel(label, max = 24) {
-      if (typeof label !== 'string' || label.length <= max) return label;
-      const words = label.split(' '); const lines = [];
-      words.forEach(w => { const last = lines[lines.length - 1]; if (!last) lines.push(w); else if ((last + ' ' + w).length <= max) lines[lines.length - 1] = last + ' ' + w; else lines.push(w); });
-      return lines;
+      if (n <= 24) return '18-24'; if (n <= 34) return '25-34'; if (n <= 44) return '35-44'; if (n <= 54) return '45-54'; if (n <= 64) return '55-64'; return '65+';
     }
 
     function isNumericScale(arr) {
-      const nums = arr.map(v => parseFloat(v)).filter(v => !isNaN(v) && v >= 1 && v <= 10);
-      return nums.length > arr.length * 0.75;
+      if (!arr || arr.length === 0) return false;
+      const nums = arr.map(v => parseFloat(v)).filter(v => !isNaN(v));
+      return nums.length > arr.length * 0.6 && Math.max(...nums) <= 10 && Math.min(...nums) >= 0;
     }
 
-    // ── COLUMN DETECTION ────────────────────────────────────────────
+    function wrapLabel(str, max = 20) {
+      if (str.length <= max) return str;
+      const words = str.split(' '); const lines = []; let cur = '';
+      for (const w of words) { if ((cur + ' ' + w).trim().length > max && cur) { lines.push(cur); cur = w; } else { cur = (cur + ' ' + w).trim(); } }
+      if (cur) lines.push(cur); return lines;
+    }
+
     function detectColumns(headers) {
-      const nh = headers.map(h => norm(h));
+      const nh = headers.map(h => norm(h || ''));
       nh.forEach((t, idx) => {
         if (CI.gender < 0 && /(sexo|genero|gender)/.test(t)) CI.gender = idx;
         else if (CI.age < 0 && /\bedad\b/.test(t) && !/(variedad|jornada)/.test(t)) CI.age = idx;
@@ -2071,41 +2060,39 @@
         else if (CI.noCompra < 0 && /(razon.*no.*comprarias|por que.*no.*comprarias)/.test(t)) CI.noCompra = idx;
         else if (CI.nps < 0 && /(recomendarias.*pascual|recomendarias.*familiar|recomendarias.*amigo)/.test(t)) CI.nps = idx;
         else if (CI.score < 0 && /valoracion general/.test(t)) CI.score = idx;
-
-        // Detect frases de acuerdo (matrix question columns)
-        if (/(cuan de acuerdo|consumido gratis con samplia)/.test(t) || t.includes('cuan de acuerdo')) {
+        if (idx === 10 || idx === 11 || idx === 12) {
           if (!CI.frasesAcuerdo.includes(idx)) CI.frasesAcuerdo.push(idx);
         }
       });
-
-      // If sabor index not in range, fall back
-      if (CI.sabor >= headers.length) {
-        const si = nh.findIndex(t => /variedad de pascual lateado/.test(t));
-        if (si >= 0) CI.sabor = si;
-      }
+      if (CI.sabor >= headers.length) { const si = nh.findIndex(t => /variedad de pascual lateado/.test(t)); if (si >= 0) CI.sabor = si; }
     }
 
     // ── CHART BUILDERS ──────────────────────────────────────────────
+    const CHART_DEFAULTS = {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false }, tooltip: { backgroundColor: '#0a0a0a', titleFont: { family: "'Poppins',sans-serif", weight: 600, size: 11 }, bodyFont: { family: "'Poppins',sans-serif", size: 11 }, padding: 10, cornerRadius: 8, displayColors: false } }
+    };
+
     function makeBar(id, labels, data, colors, horiz = false, showDL = true, hideY = false, hideX = false) {
       destroyChart(id);
       const canvas = document.getElementById(id); if (!canvas) return;
       const ctx = canvas.getContext('2d');
       const total = data.reduce((a, b) => a + b, 0);
-      const isMob = window.innerWidth <= 768; const fs = isMob ? 8 : 9;
+      const isMob = window.innerWidth <= 768; const fs = isMob ? 9 : 10;
       charts[id] = new Chart(ctx, {
         type: 'bar',
-        data: { labels: labels.map(l => wrapLabel(String(l), horiz ? 26 : 16)), datasets: [{ data, backgroundColor: Array.isArray(colors) ? colors : colors, borderRadius: 6, borderSkipped: false }] },
+        data: { labels: labels.map(l => wrapLabel(String(l), horiz ? 28 : 16)), datasets: [{ data, backgroundColor: Array.isArray(colors) ? colors : colors, borderRadius: 5, borderSkipped: false }] },
         options: {
-          responsive: true, maintainAspectRatio: false, indexAxis: horiz ? 'y' : 'x',
+          ...CHART_DEFAULTS,
+          indexAxis: horiz ? 'y' : 'x',
           plugins: {
-            legend: { display: false },
-            tooltip: { callbacks: { label: c => { const s = c.chart.data.datasets[0].data.reduce((a, b) => a + b, 0); return s > 0 ? ' ' + Math.round(c.raw / s * 100) + '%' : ' 0%'; } } },
-            datalabels: showDL ? { anchor: horiz ? 'end' : 'end', align: horiz ? 'end' : 'top', formatter: v => total > 0 ? Math.round(v / total * 100) + '%' : '', font: { family: 'Manrope', weight: 700, size: fs }, color: '#001d34', clip: false } : { display: false }
+            ...CHART_DEFAULTS.plugins,
+            datalabels: showDL ? { anchor: horiz ? 'end' : 'end', align: horiz ? 'end' : 'top', formatter: v => total > 0 ? Math.round(v / total * 100) + '%' : '', font: { family: "'Poppins',sans-serif", weight: 600, size: fs }, color: '#4a5568', clip: false } : { display: false }
           },
-          layout: { padding: { top: !horiz ? 14 : 0, right: horiz ? 44 : 0, left: horiz ? 4 : 0 } },
+          layout: { padding: { top: !horiz ? 18 : 0, right: horiz ? 48 : 0, left: horiz ? 2 : 0 } },
           scales: {
-            x: { display: (!horiz && !hideX) || (horiz && !hideX), grid: { display: horiz, color: 'rgba(0,29,52,.04)' }, ticks: { display: !hideX, font: { family: 'Manrope', size: fs } }, grace: horiz ? '12%' : 0 },
-            y: { display: !hideY, grid: { color: 'rgba(0,29,52,.04)', display: !horiz }, ticks: { font: { family: 'Manrope', size: fs } }, grace: !horiz ? '12%' : 0 }
+            x: { display: (!horiz && !hideX) || (horiz && !hideX), grid: { display: horiz, color: 'rgba(0,0,0,.04)' }, ticks: { display: !hideX, font: { family: "'Poppins',sans-serif", size: fs }, color: '#8a9bb0' }, grace: horiz ? '12%' : 0 },
+            y: { display: !hideY, grid: { color: 'rgba(0,0,0,.04)', display: !horiz }, ticks: { font: { family: "'Poppins',sans-serif", size: fs }, color: '#8a9bb0' }, grace: !horiz ? '14%' : 0 }
           }
         },
         plugins: [ChartDataLabels]
@@ -2118,21 +2105,20 @@
       const labels = Array.from({ length: max }, (_, i) => String(i + 1));
       const vals = labels.map(l => dist[l] || 0);
       const total = vals.reduce((a, b) => a + b, 0);
-      const isMob = window.innerWidth <= 768; const fs = isMob ? 8 : 9;
+      const isMob = window.innerWidth <= 768; const fs = isMob ? 9 : 10;
       charts[id] = new Chart(ctx.getContext('2d'), {
         type: 'bar',
-        data: { labels, datasets: [{ data: vals, backgroundColor: labels.map(l => colorFn(+l)), borderRadius: 6 }] },
+        data: { labels, datasets: [{ data: vals, backgroundColor: labels.map(l => colorFn(+l)), borderRadius: 5 }] },
         options: {
-          responsive: true, maintainAspectRatio: false,
+          ...CHART_DEFAULTS,
           plugins: {
-            legend: { display: false },
-            tooltip: { callbacks: { label: c => total > 0 ? ' ' + Math.round(c.raw / total * 100) + '%' : ' 0%' } },
-            datalabels: { display: true, anchor: 'end', align: 'top', formatter: v => total > 0 && v > 0 ? Math.round(v / total * 100) + '%' : '', font: { family: 'Manrope', weight: 700, size: fs }, color: '#001d34', clip: false }
+            ...CHART_DEFAULTS.plugins,
+            datalabels: { display: true, anchor: 'end', align: 'top', formatter: v => total > 0 && v > 0 ? Math.round(v / total * 100) + '%' : '', font: { family: "'Poppins',sans-serif", weight: 600, size: fs }, color: '#4a5568', clip: false }
           },
-          layout: { padding: { top: 14 } },
+          layout: { padding: { top: 18 } },
           scales: {
-            x: { grid: { display: false }, ticks: { font: { family: 'Manrope', size: fs } } },
-            y: { display: false, grace: '12%' }
+            x: { grid: { display: false }, ticks: { font: { family: "'Poppins',sans-serif", size: fs }, color: '#8a9bb0' } },
+            y: { display: false, grace: '14%' }
           }
         },
         plugins: [ChartDataLabels]
@@ -2143,44 +2129,42 @@
       destroyChart(id);
       const ctx = document.getElementById(id); if (!ctx) return;
       const total = data.reduce((a, b) => a + b, 0);
-      const isMob = window.innerWidth <= 768; const fs = isMob ? 8 : 9;
+      const isMob = window.innerWidth <= 768; const fs = isMob ? 9 : 10;
       charts[id] = new Chart(ctx.getContext('2d'), {
         type: 'doughnut',
-        data: { labels: labels.map(l => wrapLabel(String(l), 20)), datasets: [{ data, backgroundColor: colors, borderWidth: 2, borderColor: '#f8f9ff' }] },
+        data: { labels: labels.map(l => wrapLabel(String(l), 22)), datasets: [{ data, backgroundColor: colors, borderWidth: 3, borderColor: '#ffffff', hoverBorderColor: '#ffffff' }] },
         options: {
-          responsive: true, maintainAspectRatio: false,
+          ...CHART_DEFAULTS,
           plugins: {
-            legend: { display: true, position: 'bottom', labels: { usePointStyle: true, pointStyle: 'circle', font: { family: 'Manrope', size: fs } } },
-            tooltip: { callbacks: { label: c => { const s = c.chart.data.datasets[0].data.reduce((a, b) => a + b, 0); return s > 0 ? ' ' + Math.round(c.raw / s * 100) + '%' : ' 0%'; } } },
-            datalabels: { display: true, formatter: v => total > 0 ? Math.round(v / total * 100) + '%' : '', font: { family: 'Manrope', weight: 700, size: fs }, color: '#ffffff' }
+            ...CHART_DEFAULTS.plugins,
+            legend: { display: true, position: 'bottom', labels: { usePointStyle: true, pointStyle: 'circle', font: { family: "'Poppins',sans-serif", size: fs }, color: '#4a5568', padding: 12 } },
+            datalabels: { display: true, formatter: v => total > 0 ? Math.round(v / total * 100) + '%' : '', font: { family: "'Poppins',sans-serif", weight: 700, size: fs }, color: '#ffffff' }
           }
         },
         plugins: [ChartDataLabels]
       });
     }
 
-    // Horizontal bar for likert frases
     function makeFrasesChart(id, frasesData) {
       destroyChart(id);
       const ctx = document.getElementById(id); if (!ctx) return;
-      // frasesData: [{label, pctAgree}]
       const labels = frasesData.map(d => d.label);
       const vals = frasesData.map(d => d.pctAgree);
-      const isMob = window.innerWidth <= 768; const fs = isMob ? 8 : 9;
+      const isMob = window.innerWidth <= 768; const fs = isMob ? 9 : 10;
       charts[id] = new Chart(ctx.getContext('2d'), {
         type: 'bar',
-        data: { labels: labels.map(l => wrapLabel(l, 30)), datasets: [{ data: vals, backgroundColor: vals.map(v => v >= 70 ? '#1a7a47' : v >= 50 ? '#0060a8' : '#4499d4'), borderRadius: 6, borderSkipped: false }] },
+        data: { labels: labels.map(l => wrapLabel(l, 32)), datasets: [{ data: vals, backgroundColor: vals.map(v => v >= 70 ? '#00875a' : v >= 50 ? '#0066ff' : '#6ba3ff'), borderRadius: 5, borderSkipped: false }] },
         options: {
-          responsive: true, maintainAspectRatio: false, indexAxis: 'y',
+          ...CHART_DEFAULTS,
+          indexAxis: 'y',
           plugins: {
-            legend: { display: false },
-            tooltip: { callbacks: { label: c => ' ' + c.raw + '% de acuerdo' } },
-            datalabels: { anchor: 'end', align: 'end', formatter: v => v + '%', font: { family: 'Manrope', weight: 700, size: fs }, color: '#001d34', clip: false }
+            ...CHART_DEFAULTS.plugins,
+            datalabels: { anchor: 'end', align: 'end', formatter: v => v + '%', font: { family: "'Poppins',sans-serif", weight: 600, size: fs }, color: '#4a5568', clip: false }
           },
-          layout: { padding: { right: 44, left: 4 } },
+          layout: { padding: { right: 48, left: 2 } },
           scales: {
-            x: { display: false, max: 110, grid: { display: false } },
-            y: { grid: { display: false }, ticks: { font: { family: 'Manrope', size: fs } } }
+            x: { display: false, max: 115, grid: { display: false } },
+            y: { grid: { display: false }, ticks: { font: { family: "'Poppins',sans-serif", size: fs }, color: '#8a9bb0' } }
           }
         },
         plugins: [ChartDataLabels]
@@ -2201,7 +2185,6 @@
       });
       let diff = totalDots - dotsAccumulated;
       if (diff !== 0 && dotCounts.length > 0) dotCounts[0].count += diff;
-
       const grid = document.createElement('div'); grid.className = 'waffle-grid';
       dotCounts.forEach(item => {
         for (let i = 0; i < item.count; i++) {
@@ -2211,7 +2194,6 @@
         }
       });
       container.appendChild(grid);
-
       const legend = document.createElement('div'); legend.className = 'waffle-legend';
       dotCounts.forEach(item => {
         if (item.count > 0) {
@@ -2223,21 +2205,197 @@
       container.appendChild(legend);
     }
 
+    // ── MULTIVARIATE ANALYSIS ──────────────────────────────────────────────
+    function renderBubbleNichos(rows) {
+      if (CI.sabor < 0 || CI.age < 0 || CI.saborGeneral < 0 || CI.atencionPdv < 0) return;
+
+      const grupos = {};
+      
+      // Agrupar por Sabor y Rango de Edad
+      rows.forEach(r => {
+        const sabor = (r[CI.sabor] || '').toString().trim();
+        const edad = ageGroup((r[CI.age] || '').toString());
+        const scoreSabor = parseFloat((r[CI.saborGeneral] || '').toString());
+        const scoreAtencion = parseFloat((r[CI.atencionPdv] || '').toString());
+
+        if (sabor && edad && !isNaN(scoreSabor) && !isNaN(scoreAtencion)) {
+          const key = `${sabor}|${edad}`;
+          if (!grupos[key]) grupos[key] = { sabor, edad, sumSabor: 0, sumAtencion: 0, count: 0 };
+          grupos[key].sumSabor += scoreSabor;
+          grupos[key].sumAtencion += scoreAtencion;
+          grupos[key].count++;
+        }
+      });
+
+      // Formatear para Chart.js
+      const datasetsMap = {};
+      const palette = AZURE; // Usar tu paleta definida
+      let cIdx = 0;
+
+      Object.values(grupos).forEach(g => {
+        if (g.count < 5) return; // Filtrar nichos muy pequeños (outliers)
+        
+        if (!datasetsMap[g.sabor]) {
+          const sColor = getSaborColor(g.sabor);
+          datasetsMap[g.sabor] = {
+            label: g.sabor,
+            data: [],
+            backgroundColor: sColor + '99', // Transparencia
+            borderColor: sColor,
+            borderWidth: 2
+          };
+          cIdx++;
+        }
+
+        datasetsMap[g.sabor].data.push({
+          x: parseFloat((g.sumSabor / g.count).toFixed(2)),
+          y: parseFloat((g.sumAtencion / g.count).toFixed(2)),
+          r: Math.max(5, Math.min(30, g.count / 2)), // Escalar radio
+          rawCount: g.count,
+          edad: g.edad
+        });
+      });
+
+      const datasets = Object.values(datasetsMap);
+
+      destroyChart('chartBubbleNichos');
+      const ctx = document.getElementById('chartBubbleNichos');
+      if (!ctx || datasets.length === 0) return;
+
+      charts['chartBubbleNichos'] = new Chart(ctx.getContext('2d'), {
+        type: 'bubble',
+        data: { datasets },
+        options: {
+          ...CHART_DEFAULTS,
+          plugins: {
+            ...CHART_DEFAULTS.plugins,
+            legend: { display: true, position: 'top', labels: { usePointStyle: true, boxWidth: 8, font: { family: "'Poppins',sans-serif", size: 10 } } },
+            datalabels: { display: false }, // Ocultar datalabels directos para evitar ruido
+            tooltip: {
+              callbacks: {
+                label: function(ctx) {
+                  const d = ctx.raw;
+                  return [
+                    `Edad: ${d.edad}`,
+                    `Sabor: ${d.x} / 10`,
+                    `Atención: ${d.y} / 10`,
+                    `Volumen: ${d.rawCount} encuestados`
+                  ];
+                }
+              }
+            }
+          },
+          scales: {
+            x: { title: { display: true, text: 'Valoración Sabor (Media)', font: { size: 10 } }, min: 4, max: 10 },
+            y: { title: { display: true, text: 'Atención PDV (Media)', font: { size: 10 } }, min: 4, max: 10 }
+          }
+        }
+      });
+    }
+
+    function renderHeatmapCompra(rows) {
+      if (CI.saborGeneral < 0 || CI.atencionPdv < 0 || CI.compra < 0) return;
+
+      const container = document.getElementById('heatmapCompra');
+      if (!container) return;
+      container.innerHTML = '';
+
+      // Categorías de segmentación
+      const bins = [
+        { id: 'baja', min: 1, max: 5, label: 'Baja (1-5)' },
+        { id: 'media', min: 6, max: 7, label: 'Media (6-7)' },
+        { id: 'alta', min: 8, max: 10, label: 'Alta (8-10)' }
+      ];
+
+      // Inicializar matriz: matriz[atencion][sabor] = { compraSi: 0, total: 0 }
+      const matriz = {};
+      bins.forEach(atencion => {
+        matriz[atencion.id] = {};
+        bins.forEach(sabor => {
+          matriz[atencion.id][sabor.id] = { compraSi: 0, total: 0 };
+        });
+      });
+
+      // Color dominante
+      let baseColor = '0, 102, 255';
+      if (CI.sabor >= 0 && rows.length > 0) {
+        const saborArr = rows.map(r => (r[CI.sabor] || '').toString().trim()).filter(v => v !== '');
+        const saborMap = countSingle(saborArr);
+        const saborEntries = sortedEntries(saborMap, 1);
+        if (saborEntries.length > 0) {
+          baseColor = hexToRgb(getSaborColor(saborEntries[0][0]));
+        }
+      }
+
+      // Poblar datos
+      rows.forEach(r => {
+        const valSabor = parseFloat((r[CI.saborGeneral] || '').toString());
+        const valAtencion = parseFloat((r[CI.atencionPdv] || '').toString());
+        const txtCompra = norm((r[CI.compra] || '').toString().trim());
+
+        if (!isNaN(valSabor) && !isNaN(valAtencion) && txtCompra) {
+          const isCompra = txtCompra.includes('seguro que si') || txtCompra.includes('probablemente si');
+          
+          const binSabor = bins.find(b => valSabor >= b.min && valSabor <= b.max);
+          const binAtencion = bins.find(b => valAtencion >= b.min && valAtencion <= b.max);
+
+          if (binSabor && binAtencion) {
+            matriz[binAtencion.id][binSabor.id].total++;
+            if (isCompra) matriz[binAtencion.id][binSabor.id].compraSi++;
+          }
+        }
+      });
+
+      // Cabecera vacía esquina superior izquierda
+      container.appendChild(Object.assign(document.createElement('div'), { className: 'heatmap-label', innerHTML: 'Atención ↙<br>Sabor ↘' }));
+      
+      // Cabeceras X (Sabor)
+      bins.forEach(sabor => {
+        container.appendChild(Object.assign(document.createElement('div'), { className: 'heatmap-label', textContent: sabor.label }));
+      });
+
+      // Filas: Y (Atención) + Celdas de datos
+      [...bins].reverse().forEach(atencion => { // Invertido para que "Alta" quede arriba
+        // Etiqueta del Eje Y
+        container.appendChild(Object.assign(document.createElement('div'), { className: 'heatmap-label', textContent: atencion.label }));
+        
+        bins.forEach(sabor => {
+          const datos = matriz[atencion.id][sabor.id];
+          const porcentaje = datos.total > 0 ? Math.round((datos.compraSi / datos.total) * 100) : 0;
+          
+          // Cálculo de intensidad de color (Alpha de 0.1 a 1.0 basado en porcentaje)
+          const alpha = datos.total > 0 ? Math.max(0.1, porcentaje / 100) : 0.05;
+          const bgCol = datos.total > 0 ? `rgba(${baseColor}, ${alpha})` : 'var(--bg)';
+          const txtCol = (alpha > 0.5 && datos.total > 0) ? '#ffffff' : 'var(--text-primary)';
+
+          const celda = document.createElement('div');
+          celda.className = 'heatmap-cell';
+          celda.style.backgroundColor = bgCol;
+          celda.style.color = txtCol;
+          if (datos.total === 0) celda.style.border = '1px dashed var(--border)';
+          
+          celda.innerHTML = `
+            <div class="heatmap-value">${datos.total > 0 ? porcentaje + '%' : '—'}</div>
+            <div class="heatmap-sub">n=${datos.total}</div>
+          `;
+          celda.title = `${porcentaje}% compraría. (Sabor: ${sabor.label}, Atención: ${atencion.label})`;
+          
+          container.appendChild(celda);
+        });
+      });
+    }
+
     // ── RENDER ──────────────────────────────────────────────────────
     function render(rows) {
       const total = rows.length;
-
-      // KPI Encuestados
       document.getElementById('kpiTotal').textContent = total.toLocaleString('es-ES');
       document.getElementById('kpiTotalSub').textContent = (total / TOTAL_SAMPLINGS * 100).toFixed(2) + '% de samplings';
 
-      // KPI Conocimiento previo
       const conociaArr = CI.conocia >= 0 ? rows.map(r => (r[CI.conocia] || '').toString().trim()).filter(v => v !== '') : [];
       const conociaTotal = conociaArr.length;
       const siKnew = conociaArr.filter(v => { const l = norm(v); return l.startsWith('si') || l === 'si' || l.includes(' si'); }).length;
       document.getElementById('kpiKnew').textContent = conociaTotal > 0 ? pct(siKnew, conociaTotal) + '%' : '—';
 
-      // KPI Comprarían (Seguro que sí + Probablemente sí)
       const compraArr = CI.compra >= 0 ? rows.map(r => (r[CI.compra] || '').toString().trim()).filter(v => v !== '') : [];
       const compraTot = compraArr.length;
       const compraSi = compraArr.filter(v => { const l = norm(v); return l.includes('seguro que si') || l.includes('probablemente si'); }).length;
@@ -2245,25 +2403,23 @@
       document.getElementById('kpiCompra').textContent = compraTot > 0 ? pCompra + '%' : '—';
       document.getElementById('mCompraPotencial').textContent = compraTot > 0 ? pCompra + '%' : '—';
       const diffC = pCompra - BENCH_COMPRA;
-      const benchPillC = `<div class="bench-pill"><span class="bench-label">Bench ${BENCH_COMPRA}%</span><span class="bench-val" style="color:${diffC >= 0 ? 'var(--success)' : 'var(--error)'}">${diffC >= 0 ? '+' : ''}${diffC}pp</span></div>`;
+      const benchPillC = `<div class="bench-tag ${diffC >= 0 ? 'up' : diffC < 0 ? 'down' : 'neutral'}">${diffC >= 0 ? '↑' : '↓'} Bench ${BENCH_COMPRA}% (${diffC >= 0 ? '+' : ''}${diffC}pp)</div>`;
       document.getElementById('kpiBenchCompra').innerHTML = compraTot > 0 ? benchPillC : '';
       document.getElementById('mCompraBench').innerHTML = compraTot > 0 ? benchPillC : '';
 
-      // KPI Score (valoración general)
-      const scoreRaw = CI.score >= 0 ? rows.map(r => (r[CI.score] || '').toString().trim()) : [];
+      const scoreRaw = CI.saborGeneral >= 0 ? rows.map(r => (r[CI.saborGeneral] || '').toString().trim()) : [];
       const scoreArr = scoreRaw.map(v => parseFloat(v)).filter(v => !isNaN(v) && v >= 1 && v <= 10);
       const scoreAvg = scoreArr.length > 0 ? scoreArr.reduce((a, b) => a + b, 0) / scoreArr.length : 0;
       document.getElementById('kpiScore').textContent = scoreArr.length > 0 ? scoreAvg.toFixed(1) : '—';
       const diffS = parseFloat((scoreAvg - BENCH_SCORE).toFixed(1));
-      document.getElementById('kpiBenchScore').innerHTML = scoreArr.length > 0 ? `<div class="bench-pill"><span class="bench-label">Bench ${BENCH_SCORE}</span><span class="bench-val" style="color:${diffS >= 0 ? 'var(--success)' : 'var(--error)'}">${diffS >= 0 ? '+' : ''}${diffS}</span></div>` : '';
+      document.getElementById('kpiBenchScore').innerHTML = scoreArr.length > 0 ? `<div class="bench-tag ${diffS >= 0 ? 'up' : 'down'}">${diffS >= 0 ? '↑' : '↓'} Bench ${BENCH_SCORE} (${diffS >= 0 ? '+' : ''}${diffS})</div>` : '';
 
       // GÉNERO
       const genderArr = CI.gender >= 0 ? rows.map(r => (r[CI.gender] || '').toString().trim().toLowerCase()).filter(v => v !== '') : [];
       if (genderArr.length > 0) {
         const fC = genderArr.filter(v => v.startsWith('f') || v === 'mujer' || v === 'femenino').length;
         const mC = genderArr.filter(v => v.startsWith('m') || v === 'hombre' || v === 'masculino').length;
-        const gL = ['Femenino', 'Masculino']; const gD = [fC, mC]; const gCol = [AZURE[1], CORAL[1]];
-        makeDoughnut('chartGenero', gL, gD, gCol);
+        makeDoughnut('chartGenero', ['Femenino', 'Masculino'], [fC, mC], ['#0066ff', '#cc4400']);
       }
 
       // EDAD
@@ -2274,9 +2430,7 @@
         const g = ageGroup(v); if (g) { ageCounts[g]++; const n = parseInt(v); if (!isNaN(n) && n >= 18) ageNums.push(n); }
       });
       const ageData = ageGroups.map(g => ageCounts[g]);
-      if (ageData.some(v => v > 0)) {
-        makeBar('chartEdad', ageGroups, ageData, AZURE.slice(0, 6), false, true, true, false);
-      }
+      if (ageData.some(v => v > 0)) makeBar('chartEdad', ageGroups, ageData, AZURE.slice(0, 6), false, true, true, false);
       if (ageNums.length > 0) {
         const avg = (ageNums.reduce((a, b) => a + b, 0) / ageNums.length).toFixed(0);
         document.getElementById('edadMediaValue').textContent = avg + ' años';
@@ -2286,200 +2440,198 @@
         document.getElementById('edadModaValue').textContent = moda + ' años';
       }
 
-      // SABOR PROBADO (col H = index 7)
+      // SABOR
       const saborArr = CI.sabor >= 0 ? rows.map(r => (r[CI.sabor] || '').toString().trim()).filter(v => v !== '') : [];
       const saborMap = countSingle(saborArr);
       const saborEntries = sortedEntries(saborMap, 10);
       if (saborEntries.length > 0) {
-        const saborColors = saborEntries.map(e => {
-          const l = norm(e[0]);
-          if (l.includes('natural')) return '#00959C';
-          if (l.includes('cacao')) return '#454545';
-          if (l.includes('cafe')) return '#DF7A42';
-          return AZURE[0];
-        });
+        const saborColors = saborEntries.map(e => getSaborColor(e[0]));
         makeDoughnut('chartSabor', saborEntries.map(e => e[0]), saborEntries.map(e => e[1]), saborColors);
       }
 
-      // MOMENTO CONSUMIDO
+      // MOMENTO
       const momConArr = CI.momentoConsumo >= 0 ? rows.map(r => (r[CI.momentoConsumo] || '').toString().trim()).filter(v => v !== '') : [];
-      const momConMap = countSingle(momConArr);
-      const momConE = sortedEntries(momConMap, 8);
+      const momConE = sortedEntries(countSingle(momConArr), 8);
       if (momConE.length > 0) makeBar('chartMomentoConsumo', momConE.map(e => e[0]), momConE.map(e => e[1]), AZURE, true, true, false, true);
 
-      // MOMENTO CONSUMIRÍA
       const momConrArr = CI.momentoConsumiria >= 0 ? rows.map(r => (r[CI.momentoConsumiria] || '').toString().trim()).filter(v => v !== '') : [];
-      const momConrMap = countSingle(momConrArr);
-      const momConrE = sortedEntries(momConrMap, 8);
+      const momConrE = sortedEntries(countSingle(momConrArr), 8);
       if (momConrE.length > 0) makeBar('chartMomentoConsumiria', momConrE.map(e => e[0]), momConrE.map(e => e[1]), CORAL, true, true, false, true);
 
-      // ATENCIÓN EN PDV (detect if 1-10 numeric or text)
+      // ATENCIÓN EN PDV
       const atencionRaw = CI.atencionPdv >= 0 ? rows.map(r => (r[CI.atencionPdv] || '').toString().trim()).filter(v => v !== '') : [];
       const atencionIsNumeric = isNumericScale(atencionRaw);
       if (atencionIsNumeric) {
-        const nums = atencionRaw.map(v => parseFloat(v)).filter(v => !isNaN(v) && v >= 1 && v <= 10);
-        const dist = {}; nums.forEach(v => { const k = String(Math.round(v)); dist[k] = (dist[k] || 0) + 1; });
-        const nT = nums.length;
-        const mean = nT > 0 ? (nums.reduce((a, b) => a + b, 0) / nT) : 0;
-        const insat = nums.filter(v => v <= 4).length; const neu = nums.filter(v => v >= 5 && v <= 6).length;
-        const sat = nums.filter(v => v >= 7 && v <= 8).length; const msat = nums.filter(v => v >= 9).length;
-        document.getElementById('mAtencionInsat').textContent = nT > 0 ? pct(insat, nT) + '%' : '—';
-        document.getElementById('mAtencionNeu').textContent = nT > 0 ? pct(neu, nT) + '%' : '—';
-        document.getElementById('mAtencionSat').textContent = nT > 0 ? pct(sat, nT) + '%' : '—';
-        document.getElementById('mAtencionMuySat').textContent = nT > 0 ? pct(msat, nT) + '%' : '—';
-        document.getElementById('mAtencionMean').textContent = nT > 0 ? mean.toFixed(1) : '—';
-        if (nT > 0) makeRatingBar('chartAtencion', dist, 10, n => { if (n <= 4) return '#c62828'; if (n <= 6) return '#b8c2cc'; if (n <= 8) return '#9CCC65'; return '#1a7a47'; });
-        document.getElementById('atencionNote').textContent = 'Baja 1–4 · Media 5–6 · Alta 7–8 · Muy alta 9–10';
+        const atencionNums = atencionRaw.map(v => parseFloat(v)).filter(v => !isNaN(v) && v >= 1 && v <= 10);
+        const aTotal = atencionNums.length;
+        const aInsat = atencionNums.filter(v => v <= 4).length;
+        const aNeu = atencionNums.filter(v => v >= 5 && v <= 6).length;
+        const aSat = atencionNums.filter(v => v >= 7 && v <= 8).length;
+        const aMuySat = atencionNums.filter(v => v >= 9).length;
+        const aMean = aTotal > 0 ? (atencionNums.reduce((a, b) => a + b, 0) / aTotal).toFixed(1) : '—';
+        document.getElementById('mAtencionInsat').textContent = aTotal > 0 ? pct(aInsat, aTotal) + '%' : '—';
+        document.getElementById('mAtencionNeu').textContent = aTotal > 0 ? pct(aNeu, aTotal) + '%' : '—';
+        document.getElementById('mAtencionSat').textContent = aTotal > 0 ? pct(aSat, aTotal) + '%' : '—';
+        document.getElementById('mAtencionMuySat').textContent = aTotal > 0 ? pct(aMuySat, aTotal) + '%' : '—';
+        document.getElementById('mAtencionMean').textContent = aMean;
+        const atencionDist = {}; atencionNums.forEach(v => { atencionDist[String(Math.round(v))] = (atencionDist[String(Math.round(v))] || 0) + 1; });
+        makeRatingBar('chartAtencion', atencionDist, 10, v => {
+          if (v <= 4) return '#e5a0a0'; if (v <= 6) return '#d0d7e0'; if (v <= 8) return '#6ba3ff'; return '#0066ff';
+        });
+        document.getElementById('atencionNote').textContent = `n=${aTotal} · Media: ${aMean}/10`;
       } else if (atencionRaw.length > 0) {
-        // Hide mini-stat section
-        document.querySelector('#mAtencionInsat').closest('.grid-4').style.display = 'none';
-        const aMap = countSingle(atencionRaw); const aE = sortedEntries(aMap, 8);
-        makeBar('chartAtencion', aE.map(e => e[0]), aE.map(e => e[1]), AZURE, true, true, false, false);
+        const atencionMap = countSingle(atencionRaw); const atencionE = sortedEntries(atencionMap, 8);
+        if (atencionE.length > 0) makeBar('chartAtencion', atencionE.map(e => e[0]), atencionE.map(e => e[1]), AZURE, true, true, false, true);
+        ['mAtencionInsat', 'mAtencionNeu', 'mAtencionSat', 'mAtencionMuySat', 'mAtencionMean'].forEach(id => document.getElementById(id).textContent = '—');
       }
 
       // SABOR GENERAL
-      const saborGenArr = CI.saborGeneral >= 0 ? rows.map(r => (r[CI.saborGeneral] || '').toString().trim()).filter(v => v !== '') : [];
-      const saborGenIsNumeric = isNumericScale(saborGenArr);
-      if (saborGenIsNumeric) {
-        const nums = saborGenArr.map(v => parseFloat(v)).filter(v => !isNaN(v) && v >= 1 && v <= 10);
-        const dist = {}; nums.forEach(v => { const k = String(Math.round(v)); dist[k] = (dist[k] || 0) + 1; });
-        const sgT = nums.length;
-        const mean = sgT > 0 ? (nums.reduce((a, b) => a + b, 0) / sgT) : 0;
-        const baja = nums.filter(v => v <= 4).length; const neutro = nums.filter(v => v >= 5 && v <= 6).length;
-        const alta = nums.filter(v => v >= 7 && v <= 8).length; const muyAlta = nums.filter(v => v >= 9).length;
-        const posPct = sgT > 0 ? pct(alta + muyAlta, sgT) : 0;
-        const negPct = sgT > 0 ? pct(baja, sgT) : 0;
-        document.getElementById('mSaborBaja').textContent = sgT > 0 ? pct(baja, sgT) + '%' : '—';
-        document.getElementById('mSaborNeutro').textContent = sgT > 0 ? pct(neutro, sgT) + '%' : '—';
-        document.getElementById('mSaborAlta').textContent = sgT > 0 ? pct(alta, sgT) + '%' : '—';
-        document.getElementById('mSaborMuyAlta').textContent = sgT > 0 ? pct(muyAlta, sgT) + '%' : '—';
-        document.getElementById('mSaborMean').textContent = sgT > 0 ? mean.toFixed(1) : '—';
-        document.getElementById('kpiScore').textContent = sgT > 0 ? mean.toFixed(1) : 'â€”';
-        document.getElementById('kpiSaborPos').textContent = sgT > 0 ? posPct + '%' : '—';
-        document.getElementById('kpiSaborNeg').textContent = sgT > 0 ? negPct + '%' : '—';
-        const diffSabor = parseFloat((mean - BENCH_SCORE).toFixed(1));
-        document.getElementById('kpiBenchScore').innerHTML = sgT > 0 ? `<div class="bench-pill"><span class="bench-label">Bench ${BENCH_SCORE}</span><span class="bench-val" style="color:${diffSabor >= 0 ? 'var(--success)' : 'var(--error)'}">${diffSabor >= 0 ? '+' : ''}${diffSabor}</span></div>` : '';
-        if (sgT > 0) makeRatingBar('chartSaborGeneral', dist, 10, n => { if (n <= 4) return '#c62828'; if (n <= 6) return '#b8c2cc'; if (n <= 8) return '#9CCC65'; return '#1a7a47'; });
-        document.getElementById('saborGeneralNote').textContent = 'Baja 1–4 · Media 5–6 · Alta 7–8 · Muy alta 9–10';
-        document.getElementById('saborGeneralStats').style.display = '';
-      } else {
-        const saborGenMap = countSingle(saborGenArr); const saborGenE = sortedEntries(saborGenMap, 8);
-        if (saborGenE.length > 0) makeBar('chartSaborGeneral', saborGenE.map(e => e[0]), saborGenE.map(e => e[1]), AZURE, true, true, false, false);
-        document.getElementById('saborGeneralStats').style.display = 'none';
-        document.getElementById('kpiScore').textContent = 'â€”';
-        document.getElementById('kpiBenchScore').innerHTML = '';
-        document.getElementById('kpiSaborPos').textContent = '—';
-        document.getElementById('kpiSaborNeg').textContent = '—';
-        document.getElementById('kpiScore').textContent = '\u2014';
-        document.getElementById('saborGeneralNote').textContent = '';
+      const saborGeneralRaw = CI.saborGeneral >= 0 ? rows.map(r => (r[CI.saborGeneral] || '').toString().trim()).filter(v => v !== '') : [];
+      const saborIsNumeric = isNumericScale(saborGeneralRaw);
+      if (saborIsNumeric) {
+        const sNums = saborGeneralRaw.map(v => parseFloat(v)).filter(v => !isNaN(v) && v >= 1 && v <= 10);
+        const sTotal = sNums.length;
+        const sBaja = sNums.filter(v => v <= 4).length;
+        const sNeutro = sNums.filter(v => v >= 5 && v <= 6).length;
+        const sAlta = sNums.filter(v => v >= 7 && v <= 8).length;
+        const sMuyAlta = sNums.filter(v => v >= 9).length;
+        const sMean = sTotal > 0 ? (sNums.reduce((a, b) => a + b, 0) / sTotal).toFixed(1) : '—';
+        document.getElementById('mSaborBaja').textContent = sTotal > 0 ? pct(sBaja, sTotal) + '%' : '—';
+        document.getElementById('mSaborNeutro').textContent = sTotal > 0 ? pct(sNeutro, sTotal) + '%' : '—';
+        document.getElementById('mSaborAlta').textContent = sTotal > 0 ? pct(sAlta, sTotal) + '%' : '—';
+        document.getElementById('mSaborMuyAlta').textContent = sTotal > 0 ? pct(sMuyAlta, sTotal) + '%' : '—';
+        document.getElementById('mSaborMean').textContent = sMean;
+        document.getElementById('kpiSaborPos').textContent = sTotal > 0 ? pct(sAlta + sMuyAlta, sTotal) + '%' : '—';
+        const saborGeneralDist = {}; sNums.forEach(v => { saborGeneralDist[String(Math.round(v))] = (saborGeneralDist[String(Math.round(v))] || 0) + 1; });
+        makeRatingBar('chartSaborGeneral', saborGeneralDist, 10, v => {
+          if (v <= 4) return '#e5a0a0'; if (v <= 6) return '#d0d7e0'; if (v <= 8) return '#6ba3ff'; return '#0066ff';
+        });
+        document.getElementById('saborGeneralNote').textContent = `n=${sTotal} · Media: ${sMean}/10`;
+      } else if (saborGeneralRaw.length > 0) {
+        const sgMap = countSingle(saborGeneralRaw); const sgEntries = sortedEntries(sgMap, 8);
+        const sgTotal = saborGeneralRaw.length;
+        const sgSat = saborGeneralRaw.filter(v => { const l = norm(v); return /(satisfecho|muy satisfecho|bueno|muy bueno|excelente)/.test(l); }).length;
+        document.getElementById('kpiSaborPos').textContent = sgTotal > 0 ? pct(sgSat, sgTotal) + '%' : '—';
+        const sgBaja = saborGeneralRaw.filter(v => { const l = norm(v); return /(insatisfecho|malo|muy malo|pesimo)/.test(l); }).length;
+        const sgNeutro = saborGeneralRaw.filter(v => { const l = norm(v); return /(regular|ni|neutro)/.test(l); }).length;
+        const sgAlta = saborGeneralRaw.filter(v => { const l = norm(v); return /satisfecho/.test(l) && !/muy/.test(l); }).length;
+        const sgMuyAlta = saborGeneralRaw.filter(v => { const l = norm(v); return /muy satisfecho/.test(l); }).length;
+        document.getElementById('mSaborBaja').textContent = sgTotal > 0 ? pct(sgBaja, sgTotal) + '%' : '—';
+        document.getElementById('mSaborNeutro').textContent = sgTotal > 0 ? pct(sgNeutro, sgTotal) + '%' : '—';
+        document.getElementById('mSaborAlta').textContent = sgTotal > 0 ? pct(sgAlta, sgTotal) + '%' : '—';
+        document.getElementById('mSaborMuyAlta').textContent = sgTotal > 0 ? pct(sgMuyAlta, sgTotal) + '%' : '—';
+        document.getElementById('mSaborMean').textContent = '—';
+        if (sgEntries.length > 0) makeBar('chartSaborGeneral', sgEntries.map(e => e[0]), sgEntries.map(e => e[1]), AZURE, true, true, false, true);
       }
 
       // MÁS SABORES
-      const masSabArr = CI.masSabores >= 0 ? rows.map(r => (r[CI.masSabores] || '').toString().trim()).filter(v => v !== '') : [];
-      const masSabIsNumeric = isNumericScale(masSabArr);
-      if (masSabIsNumeric) {
-        const nums = masSabArr.map(v => parseFloat(v)).filter(v => !isNaN(v) && v >= 1 && v <= 10);
-        const dist = {}; nums.forEach(v => { const k = String(Math.round(v)); dist[k] = (dist[k] || 0) + 1; });
-        const msT = nums.length;
-        const mean = msT > 0 ? (nums.reduce((a, b) => a + b, 0) / msT) : 0;
-        const baja = nums.filter(v => v <= 4).length; const neutro = nums.filter(v => v >= 5 && v <= 6).length;
-        const alta = nums.filter(v => v >= 7 && v <= 8).length; const muyAlta = nums.filter(v => v >= 9).length;
-        document.getElementById('mMasSabBaja').textContent = msT > 0 ? pct(baja, msT) + '%' : '—';
-        document.getElementById('mMasSabNeutro').textContent = msT > 0 ? pct(neutro, msT) + '%' : '—';
-        document.getElementById('mMasSabAlta').textContent = msT > 0 ? pct(alta, msT) + '%' : '—';
-        document.getElementById('mMasSabMuyAlta').textContent = msT > 0 ? pct(muyAlta, msT) + '%' : '—';
-        document.getElementById('mMasSabMean').textContent = msT > 0 ? mean.toFixed(1) : '—';
-        if (msT > 0) makeRatingBar('chartMasSabores', dist, 10, n => { if (n <= 4) return '#c62828'; if (n <= 6) return '#b8c2cc'; if (n <= 8) return '#9CCC65'; return '#1a7a47'; });
-        document.getElementById('masSaboresNote').textContent = 'Baja 1–4 · Media 5–6 · Alta 7–8 · Muy alta 9–10';
-        document.getElementById('masSaboresStats').style.display = '';
-      } else {
-        const masSabMap = countSingle(masSabArr); const masSabE = sortedEntries(masSabMap, 6);
-        if (masSabE.length > 0) makeBar('chartMasSabores', masSabE.map(e => e[0]), masSabE.map(e => e[1]), CORAL, true, true, false, false);
-        document.getElementById('masSaboresStats').style.display = 'none';
-        document.getElementById('masSaboresNote').textContent = '';
-      }
-
-      let frasesHandled = false;
-      const frasesCols = [10, 11, 12].filter(idx => idx < allHeaders.length);
-      if (frasesCols.length > 0) {
-        const frasesData = frasesCols.map(idx => {
-          const raw = rows.map(r => (r[idx] || '').toString().trim()).filter(v => v !== '');
-          const isNum = isNumericScale(raw);
-          let pctAg = 0;
-          let pctNeu = 0;
-          let pctDis = 0;
-          if (isNum) {
-            const nums = raw.map(v => parseFloat(v)).filter(v => !isNaN(v));
-            const agree = nums.filter(v => v >= 4).length;
-            const neutral = nums.filter(v => v === 3).length;
-            const disagree = nums.filter(v => v <= 2).length;
-            pctAg = nums.length > 0 ? pct(agree, nums.length) : 0;
-            pctNeu = nums.length > 0 ? pct(neutral, nums.length) : 0;
-            pctDis = nums.length > 0 ? pct(disagree, nums.length) : 0;
-          } else {
-            const agree = raw.filter(v => { const l = norm(v); return l.startsWith('de acuerdo') || l.startsWith('totalmente de acuerdo'); }).length;
-            const neutral = raw.filter(v => norm(v).includes('ni de acuerdo ni en desacuerdo')).length;
-            const disagree = raw.filter(v => { const l = norm(v); return l.startsWith('en desacuerdo') || l.startsWith('totalmente en desacuerdo'); }).length;
-            pctAg = raw.length > 0 ? pct(agree, raw.length) : 0;
-            pctNeu = raw.length > 0 ? pct(neutral, raw.length) : 0;
-            pctDis = raw.length > 0 ? pct(disagree, raw.length) : 0;
-          }
-          let label = (allHeaders[idx] || '').toString().trim();
-          const bracket = label.match(/\[([^\]]+)\]/);
-          if (bracket) label = bracket[1];
-          else {
-            const parts = label.split(/[?.](?=[A-Z\u00C0-\u024F])/);
-            label = parts[parts.length - 1].trim() || label;
-            if (label.length > 70) label = label.substring(0, 70) + '...';
-          }
-          let colorClass = 'blue';
-          if (pctAg >= 70) colorClass = 'green';
-          else if (pctAg < 50) colorClass = 'red';
-          return { label, pctAgree: pctAg, pctNeutral: pctNeu, pctDisagree: pctDis, colorClass };
-        }).filter(d => d.label);
-        document.getElementById('frasesContainer').innerHTML = frasesData.length > 0
-          ? frasesData.map(d => `<div class="agreement-card"><div class="agreement-title">${d.label}</div><div class="agreement-top"><div><div class="agreement-kpi-label">De acuerdo</div><div class="agreement-kpi-value ${d.colorClass}">${d.pctAgree}%</div></div></div><div class="agreement-bar"><div class="agreement-seg agreement-dis" style="width:${d.pctDisagree}%"></div><div class="agreement-seg agreement-neu" style="width:${d.pctNeutral}%"></div><div class="agreement-seg agreement-agr" style="width:${d.pctAgree}%"></div></div><div class="agreement-legend"><div class="agreement-metric"><div class="agreement-metric-value red">${d.pctDisagree}%</div><div class="agreement-metric-label">En desacuerdo</div></div><div class="agreement-metric"><div class="agreement-metric-value light-gray">${d.pctNeutral}%</div><div class="agreement-metric-label">Neutrales</div></div><div class="agreement-metric"><div class="agreement-metric-value ${d.colorClass}">${d.pctAgree}%</div><div class="agreement-metric-label">De acuerdo</div></div></div></div>`).join('')
-          : '<p style="font-size:.75rem;color:var(--on-surface-muted);text-align:center;padding:1.5rem 0;grid-column:1/-1;">Sin datos de frases de acuerdo en esta selección.</p>';
-        frasesHandled = true;
+      const masSaboresRaw = CI.masSabores >= 0 ? rows.map(r => (r[CI.masSabores] || '').toString().trim()).filter(v => v !== '') : [];
+      const msSabIsNumeric = isNumericScale(masSaboresRaw);
+      if (msSabIsNumeric) {
+        const msNums = masSaboresRaw.map(v => parseFloat(v)).filter(v => !isNaN(v) && v >= 1 && v <= 10);
+        const msTotal = msNums.length;
+        const msBaja = msNums.filter(v => v <= 4).length;
+        const msNeutro = msNums.filter(v => v >= 5 && v <= 6).length;
+        const msAlta = msNums.filter(v => v >= 7 && v <= 8).length;
+        const msMuyAlta = msNums.filter(v => v >= 9).length;
+        const msMean = msTotal > 0 ? (msNums.reduce((a, b) => a + b, 0) / msTotal).toFixed(1) : '—';
+        document.getElementById('mMasSabBaja').textContent = msTotal > 0 ? pct(msBaja, msTotal) + '%' : '—';
+        document.getElementById('mMasSabNeutro').textContent = msTotal > 0 ? pct(msNeutro, msTotal) + '%' : '—';
+        document.getElementById('mMasSabAlta').textContent = msTotal > 0 ? pct(msAlta, msTotal) + '%' : '—';
+        document.getElementById('mMasSabMuyAlta').textContent = msTotal > 0 ? pct(msMuyAlta, msTotal) + '%' : '—';
+        document.getElementById('mMasSabMean').textContent = msMean;
+        const msDist = {}; msNums.forEach(v => { msDist[String(Math.round(v))] = (msDist[String(Math.round(v))] || 0) + 1; });
+        makeRatingBar('chartMasSabores', msDist, 10, v => {
+          if (v <= 4) return '#e5a0a0'; if (v <= 6) return '#d0d7e0'; if (v <= 8) return '#6ba3ff'; return '#0066ff';
+        });
+        document.getElementById('masSaboresNote').textContent = `n=${msTotal} · Media: ${msMean}/10`;
+      } else if (masSaboresRaw.length > 0) {
+        const msMap = countSingle(masSaboresRaw); const msEntries = sortedEntries(msMap, 8);
+        const msTotal = masSaboresRaw.length;
+        const msSi = masSaboresRaw.filter(v => { const l = norm(v); return l.startsWith('si') || l.includes('claro') || l.includes('supuesto'); }).length;
+        const msNo = masSaboresRaw.filter(v => { const l = norm(v); return l.startsWith('no'); }).length;
+        const msNeutro = msTotal - msSi - msNo;
+        document.getElementById('mMasSabBaja').textContent = msTotal > 0 ? pct(msNo, msTotal) + '%' : '—';
+        document.getElementById('mMasSabNeutro').textContent = msTotal > 0 ? pct(msNeutro, msTotal) + '%' : '—';
+        document.getElementById('mMasSabAlta').textContent = '—';
+        document.getElementById('mMasSabMuyAlta').textContent = msTotal > 0 ? pct(msSi, msTotal) + '%' : '—';
+        document.getElementById('mMasSabMean').textContent = '—';
+        if (msEntries.length > 0) makeBar('chartMasSabores', msEntries.map(e => e[0]), msEntries.map(e => e[1]), AZURE, true, true, false, true);
       }
 
       // FRASES DE ACUERDO
-      if (false && CI.frasesAcuerdo.length > 0) {
-        const frasesData = CI.frasesAcuerdo.map(idx => {
-          const raw = rows.map(r => (r[idx] || '').toString().trim()).filter(v => v !== '');
-          const isNum = isNumericScale(raw);
-          let pctAg = 0;
-          if (isNum) {
-            const nums = raw.map(v => parseFloat(v)).filter(v => !isNaN(v));
-            const agree = nums.filter(v => v >= 4).length; // 4-5 on 1-5 scale
-            pctAg = nums.length > 0 ? pct(agree, nums.length) : 0;
+      let frasesHandled = false;
+      if (CI.frasesAcuerdo.length > 0) {
+        const frasesData = [];
+        CI.frasesAcuerdo.forEach(idx => {
+          const h = allHeaders[idx] || '';
+          const questionMatch = h.match(/\[([^\]]+)\]/);
+          let label = questionMatch ? questionMatch[1] : h;
+          if (label.length > 80) label = label.slice(0, 80) + '…';
+          const vals = rows.map(r => (r[idx] || '').toString().trim()).filter(v => v !== '');
+          if (vals.length === 0) return;
+          let agree = 0, disagree = 0, neutral = 0;
+          if (isNumericScale(vals)) {
+            const nums = vals.map(v => parseFloat(v)).filter(v => !isNaN(v));
+            const maxVal = Math.max(...nums) <= 5 && Math.min(...nums) >= 1 ? 5 : 10;
+            if (maxVal === 5) {
+              disagree = nums.filter(v => v <= 2).length;
+              neutral = nums.filter(v => v === 3).length;
+              agree = nums.filter(v => v >= 4).length;
+            } else {
+              disagree = nums.filter(v => v <= 4).length;
+              neutral = nums.filter(v => v >= 5 && v <= 6).length;
+              agree = nums.filter(v => v >= 7).length;
+            }
           } else {
-            const agree = raw.filter(v => { const l = norm(v); return l.startsWith('de acuerdo') || l.startsWith('totalmente de acuerdo'); }).length;
-            pctAg = raw.length > 0 ? pct(agree, raw.length) : 0;
+            agree = vals.filter(v => { const l = norm(v); return l.includes('de acuerdo') || l.includes('si'); }).length;
+            disagree = vals.filter(v => { const l = norm(v); return l.includes('en desacuerdo') || l.includes('no'); }).length;
+            neutral = vals.length - agree - disagree;
           }
-          // Extract sub-label from header
-          let label = (allHeaders[idx] || '').toString().trim();
-          const bracket = label.match(/\[([^\]]+)\]/);
-          if (bracket) label = bracket[1];
-          else {
-            // Remove main question prefix
-            const parts = label.split(/[?.](?=[A-Z\u00C0-\u024F])/);
-            label = parts[parts.length - 1].trim() || label;
-            if (label.length > 50) label = label.substring(0, 50) + '…';
-          }
-          return { label, pctAgree: pctAg };
+          const pctAgree = pct(agree, vals.length);
+          const pctDisagree = pct(disagree, vals.length);
+          const pctNeutral = pct(neutral, vals.length);
+          frasesData.push({ label, pctAgree, pctDisagree, pctNeutral, total: vals.length });
         });
         if (frasesData.length > 0) {
-          const h = Math.max(150, frasesData.length * 45 + 30);
+          frasesHandled = true;
+          const container = document.getElementById('frasesContainer');
+          container.innerHTML = '';
+          container.style.display = 'grid';
+          const cols = frasesData.length <= 2 ? frasesData.length : 3;
+          container.style.gridTemplateColumns = `repeat(${cols},1fr)`;
+          frasesData.forEach(d => {
+            const card = document.createElement('div'); card.className = 'agreement-card';
+            card.innerHTML = `
+              <div class="agreement-title">${d.label}</div>
+              <div class="agreement-bar">
+                <div class="agreement-seg seg-dis" style="width:${d.pctDisagree}%"></div>
+                <div class="agreement-seg seg-neu" style="width:${d.pctNeutral}%"></div>
+                <div class="agreement-seg seg-agr" style="width:${d.pctAgree}%"></div>
+              </div>
+              <div class="agreement-legend">
+                <div class="agreement-metric"><div class="agreement-metric-val red">${d.pctDisagree}%</div><div class="agreement-metric-lbl">Desacuerdo</div></div>
+                <div class="agreement-metric"><div class="agreement-metric-val muted">${d.pctNeutral}%</div><div class="agreement-metric-lbl">Neutro</div></div>
+                <div class="agreement-metric"><div class="agreement-metric-val green">${d.pctAgree}%</div><div class="agreement-metric-lbl">Acuerdo</div></div>
+              </div>
+            `;
+            container.appendChild(card);
+          });
+
+          // Also handle frasesChart if single chart approach used
           const w = document.getElementById('frasesContainer');
-          if (w) w.querySelector('.chart-wrap').style.height = h + 'px';
-          makeFrasesChart('chartFrases', frasesData);
+          if (w && w.querySelector('.chart-wrap')) {
+            const h = Math.max(150, frasesData.length * 45 + 30);
+            w.querySelector('.chart-wrap').style.height = h + 'px';
+            makeFrasesChart('chartFrases', frasesData);
+          }
         }
-      } else if (!frasesHandled) {
-        document.getElementById('frasesContainer').innerHTML = '<p style="font-size:.75rem;color:var(--on-surface-muted);text-align:center;padding:1.5rem 0;">Sin datos de frases de acuerdo en esta selección.</p>';
+      }
+      if (!frasesHandled) {
+        document.getElementById('frasesContainer').innerHTML = '<p style="font-size:12px;color:var(--text-tertiary);text-align:center;padding:24px 0;grid-column:1/-1;">Sin datos de frases de acuerdo en esta selección.</p>';
       }
 
-      // COMPRARÍA A 1,49€
+      // COMPRARÍA
       const compraGrafArr = CI.compra >= 0 ? rows.map(r => (r[CI.compra] || '').toString().trim()).filter(v => v !== '') : [];
       const compraOrder = ['Seguro que sí', 'Probablemente sí', 'No lo sé', 'Probablemente no', 'Seguro que no'];
       const compraGrafMap = {};
@@ -2494,18 +2646,17 @@
       const compraLabels = compraOrder.filter(label => (compraGrafMap[label] || 0) > 0);
       const compraData = compraLabels.map(label => compraGrafMap[label] || 0);
       const compraColors = compraLabels.map(label => {
-        if (label === 'Seguro que sí' || label === 'Probablemente sí') return '#0060a8';
-        if (label === 'No lo sé') return '#b8c2cc';
-        return '#8b1e2d';
+        if (label === 'Seguro que sí' || label === 'Probablemente sí') return '#0066ff';
+        if (label === 'No lo sé') return '#d0d7e0';
+        return '#c0392b';
       });
       if (compraLabels.length > 0) makeBar('chartCompra', compraLabels, compraData, compraColors, true, true, false, true);
 
       // NO COMPRARÍA
-      const noCompraArr = CI.noCompra >= 0 ? rows.map(r => (r[CI.noCompra] || '').toString().trim()).filter(v => v !== '') : [];
       const noCompraMap = countMulti(rows, CI.noCompra); const noCompraE = sortedEntries(noCompraMap, 8);
-      if (noCompraE.length > 0) makeBar('chartNoCompra', noCompraE.map(e => e[0]), noCompraE.map(e => e[1]), '#8b1e2d', true, true, false, true);
+      if (noCompraE.length > 0) makeBar('chartNoCompra', noCompraE.map(e => e[0]), noCompraE.map(e => e[1]), '#c0392b', true, true, false, true);
 
-      // NPS / RECOMENDARÍA
+      // NPS
       const npsRaw = CI.nps >= 0 ? rows.map(r => (r[CI.nps] || '').toString().trim()).filter(v => v !== '') : [];
       const npsIsNumeric = isNumericScale(npsRaw);
       destroyChart('chartNps');
@@ -2536,7 +2687,6 @@
         document.getElementById('npsLegPasLabel').textContent = 'Pasivos';
         document.getElementById('npsLegProLabel').textContent = 'Promotores';
       } else if (npsRaw.length > 0) {
-        const npsMap = countSingle(npsRaw); const npsE = sortedEntries(npsMap, 6);
         const pSi = npsRaw.filter(v => { const l = norm(v); return l.startsWith('si') || l.includes(' si'); }).length;
         const pSiPct = pct(pSi, npsRaw.length);
         const pNoPct = 100 - pSiPct;
@@ -2563,41 +2713,68 @@
       }
 
       // INSIGHTS
-      let flavorBestMsg = "";
+      let flavorBestMsg = '';
       if (CI.sabor >= 0) {
         let scMap = {};
         rows.forEach(r => {
-          let s = (r[CI.sabor] || "").toString().trim();
-          let v = parseFloat((r[CI.saborGeneral >= 0 ? CI.saborGeneral : CI.score] || "").toString().trim());
-          if (s && !isNaN(v)) {
-            if (!scMap[s]) scMap[s] = { sum: 0, count: 0 };
-            scMap[s].sum += v;
-            scMap[s].count++;
-          }
+          let s = (r[CI.sabor] || '').toString().trim();
+          let v = parseFloat((r[CI.saborGeneral >= 0 ? CI.saborGeneral : CI.score] || '').toString().trim());
+          if (s && !isNaN(v)) { if (!scMap[s]) scMap[s] = { sum: 0, count: 0 }; scMap[s].sum += v; scMap[s].count++; }
         });
-        let bestF = "", bestA = 0;
-        Object.entries(scMap).forEach(([s, data]) => {
-          let avg = data.sum / data.count;
-          if (avg > bestA) { bestA = avg; bestF = s; }
-        });
+        let bestF = '', bestA = 0;
+        Object.entries(scMap).forEach(([s, data]) => { let avg = data.sum / data.count; if (avg > bestA) { bestA = avg; bestF = s; } });
         if (bestF) flavorBestMsg = `, destacando la variedad <strong>${bestF}</strong> como la mejor valorada (<strong>${bestA.toFixed(1)}</strong>).`;
       }
 
-      document.getElementById('insightCompra').innerHTML = compraTot > 0 ?
-        `<strong>${pCompra}%</strong> de los encuestados son compradores potenciales de Pascual Lateado${pCompra >= BENCH_COMPRA ? ', <strong>superando el benchmark del sector (' + BENCH_COMPRA + '%)</strong>' : ' (benchmark sector: ' + BENCH_COMPRA + '%)'}.` : '—';
-      document.getElementById('insightScore').innerHTML = scoreArr.length > 0 ?
-        `<strong>${pct((scoreArr.filter(v => v >= 7).length), scoreArr.length)}%</strong> valora el producto de forma positiva, con una media de <strong>${scoreAvg.toFixed(1)}/10</strong>${flavorBestMsg} <br><br><strong>Finding:</strong> El producto goza de una excelente aceptación organoléptica, con una clara mayoría de consumidores situados en el rango de satisfacción alta.` : '—';
-      // Momento insight
+      document.getElementById('insightCompra').innerHTML = compraTot > 0 ? `<strong>${pCompra}%</strong> de los encuestados son compradores potenciales de Pascual Lateado${pCompra >= BENCH_COMPRA ? ', <strong>superando el benchmark del sector (' + BENCH_COMPRA + '%)</strong>' : ' (benchmark sector: ' + BENCH_COMPRA + '%)'}.` : '—';
+      document.getElementById('insightScore').innerHTML = scoreArr.length > 0 ? `<strong>${pct((scoreArr.filter(v => v >= 7).length), scoreArr.length)}%</strong> valora el producto de forma positiva, con una media de <strong>${scoreAvg.toFixed(1)}/10</strong>${flavorBestMsg} <br><br><strong>Finding:</strong> El producto goza de una excelente aceptación organoléptica, con una clara mayoría de consumidores situados en el rango de satisfacción alta.` : '—';
+
       const topMom = momConE.length > 0 ? momConE[0][0] : '';
       const topMomPct = momConE.length > 0 && momConArr.length > 0 ? pct(momConE[0][1], momConArr.length) : 0;
-      document.getElementById('insightMomento').innerHTML = topMom ?
-        `El principal momento de consumo es <strong>${topMom}</strong>, elegido por el <strong>${topMomPct}%</strong> de los encuestados, lo que define oportunidades de comunicación.` : '—';
-      // NPS insight
-      const pRecomienda = npsRaw.length > 0 ? (npsIsNumeric ? pct(npsRaw.map(v => parseFloat(v)).filter(v => !isNaN(v) && v >= 9).length, npsRaw.length) : pct(npsRaw.filter(v => { const l = norm(v); return l.startsWith('si'); }).length, npsRaw.length)) : 0;
-      document.getElementById('insightNps').innerHTML = npsRaw.length > 0 ?
-        `<strong>${pRecomienda}%</strong> de los encuestados recomendarían Pascual Lateado a un familiar o amigo, indicando un fuerte potencial de conversión viral.` : '—';
+      document.getElementById('insightMomento').innerHTML = topMom ? `El principal momento de consumo es <strong>${topMom}</strong>, elegido por el <strong>${topMomPct}%</strong> de los encuestados, lo que define oportunidades de comunicación.` : '—';
 
-      // FOOTER
+      const pRecomienda = npsRaw.length > 0 ? (npsIsNumeric ? pct(npsRaw.map(v => parseFloat(v)).filter(v => !isNaN(v) && v >= 9).length, npsRaw.length) : pct(npsRaw.filter(v => { const l = norm(v); return l.startsWith('si'); }).length, npsRaw.length)) : 0;
+      document.getElementById('insightNps').innerHTML = npsRaw.length > 0 ? `<strong>${pRecomienda}%</strong> de los encuestados recomendarían Pascual Lateado a un familiar o amigo, indicando un fuerte potencial de conversión viral.` : '—';
+
+      // INSIGHTS MULTIVARIANTE - ANÁLISIS PREDICTIVO
+      // Sweet Spot Demográfico
+      if (CI.age >= 0 && CI.saborGeneral >= 0 && CI.atencionPdv >= 0) {
+        const ageGroupsData = {};
+        rows.forEach(r => {
+          const age = (r[CI.age] || '').toString().trim();
+          const ageGrp = ageGroup(age);
+          const saborVal = parseFloat((r[CI.saborGeneral] || '').toString());
+          const atencionVal = parseFloat((r[CI.atencionPdv] || '').toString());
+          if (ageGrp && !isNaN(saborVal) && !isNaN(atencionVal)) {
+            if (!ageGroupsData[ageGrp]) ageGroupsData[ageGrp] = { sabor: 0, atencion: 0, count: 0 };
+            ageGroupsData[ageGrp].sabor += saborVal;
+            ageGroupsData[ageGrp].atencion += atencionVal;
+            ageGroupsData[ageGrp].count++;
+          }
+        });
+        let bestAgeGroup = '', bestScore = 0;
+        Object.entries(ageGroupsData).forEach(([age, data]) => {
+          const avgSabor = data.sabor / data.count;
+          const avgAtencion = data.atencion / data.count;
+          const score = avgSabor + avgAtencion;
+          if (score > bestScore) { bestScore = score; bestAgeGroup = age; }
+        });
+        if (bestAgeGroup && ageGroupsData[bestAgeGroup]) {
+          const bestData = ageGroupsData[bestAgeGroup];
+          const avgSabor = (bestData.sabor / bestData.count).toFixed(1);
+          const avgAtencion = (bestData.atencion / bestData.count).toFixed(1);
+          document.getElementById('insightSweetSpot').innerHTML = `El segmento <strong>${bestAgeGroup}</strong> representa el "Sweet Spot" demográfico con <strong>${avgSabor}/10</strong> en valoración de sabor y <strong>${avgAtencion}/10</strong> en atención en PDV, maximizando el potencial de conversión.`;
+        } else {
+          document.getElementById('insightSweetSpot').innerHTML = '—';
+        }
+      } else {
+        document.getElementById('insightSweetSpot').innerHTML = '—';
+      }
+
+      // Llamada a gráficos de análisis multivariante
+      renderBubbleNichos(rows);
+      renderHeatmapCompra(rows);
+
       document.getElementById('footerInfo').textContent = `Total encuestados: ${total.toLocaleString('es-ES')} · Campaña 12/03/2026 – 05/04/2026`;
     }
 
@@ -2607,13 +2784,7 @@
       const a = document.getElementById('fAge').value;
       const s = document.getElementById('fSabor').value;
       return allRows.filter(r => {
-        if (g && CI.gender >= 0) {
-          const v = (r[CI.gender] || '').toString().trim().toLowerCase();
-          const isF = v.startsWith('f') || v === 'mujer' || v === 'femenino';
-          const isM = v.startsWith('m') || v === 'hombre' || v === 'masculino';
-          if (g === 'F' && !isF) return false;
-          if (g === 'M' && !isM) return false;
-        }
+        if (g && CI.gender >= 0) { const v = (r[CI.gender] || '').toString().trim().toLowerCase(); const isF = v.startsWith('f') || v === 'mujer' || v === 'femenino'; const isM = v.startsWith('m') || v === 'hombre' || v === 'masculino'; if (g === 'F' && !isF) return false; if (g === 'M' && !isM) return false; }
         if (a && CI.age >= 0) { const ag = ageGroup((r[CI.age] || '').toString()); if (!ag || ag !== a) return false; }
         if (s && CI.sabor >= 0) { const sv = (r[CI.sabor] || '').toString().trim(); if (sv !== s) return false; }
         return true;
@@ -2632,7 +2803,6 @@
     function stripWrapper(raw) { const text = raw.toString().trim(); const w = text.match(/^[^(]*\((.*)\);?$/s); return w ? w[1] : text.replace(/^[^\{]+/, '').replace(/[^\}]+$/, ''); }
     function parseHeaders(raw) { const j = JSON.parse(stripWrapper(raw)); return j.table.cols.map(c => c.label || c.id || ''); }
     function parseRows(raw) { const j = JSON.parse(stripWrapper(raw)); return j.table.rows.map(r => r.c.map(c => c ? (c.v ?? c.f ?? '') : '')); }
-
     function buildCorsUrl(base) { const u = new URL(base); u.searchParams.set('tqx', 'out:json'); return u.toString(); }
     function buildJsonpUrl(base, cb) { const u = new URL(base); u.searchParams.set('tqx', 'responseHandler:' + cb); return u.toString(); }
 
@@ -2659,8 +2829,8 @@
 
     function showErrorBanner(msg, detail = '') {
       let banner = document.getElementById('dataBanner');
-      if (!banner) { banner = document.createElement('div'); banner.id = 'dataBanner'; banner.style.cssText = 'position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);z-index:999;background:#001d34;color:#fff;font-family:Manrope,sans-serif;font-size:.8rem;font-weight:600;padding:.9rem 1.4rem;border-radius:2rem;box-shadow:0 8px 40px rgba(0,29,52,.35);display:flex;align-items:center;gap:.75rem;max-width:92vw;'; document.body.appendChild(banner); }
-      banner.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><div><div style="color:#fff">${msg}</div>${detail ? `<div style="color:#94a3b8;font-size:.72rem;margin-top:2px">${detail}</div>` : ''}</div><button onclick="this.parentElement.remove()" style="background:none;border:none;color:#94a3b8;cursor:pointer;font-size:1.1rem;line-height:1;padding:0 0 0 .5rem">✕</button>`;
+      if (!banner) { banner = document.createElement('div'); banner.id = 'dataBanner'; document.body.appendChild(banner); }
+      banner.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#f87171" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><div><div style="color:#fff">${msg}</div>${detail ? `<div style="color:#94a3b8;font-size:11px;margin-top:2px">${detail}</div>` : ''}</div><button onclick="this.parentElement.remove()" style="background:none;border:none;color:#94a3b8;cursor:pointer;font-size:16px;line-height:1;padding:0 0 0 8px">✕</button>`;
     }
 
     async function fetchData() {
@@ -2677,13 +2847,13 @@
         render(getFiltered());
         const b = document.getElementById('dataBanner'); if (b) b.remove();
         const now = new Date();
-        document.getElementById('lastUpdate').textContent = `Actualizado: ${now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}${usedJsonp ? ' (JSONP)' : ''}`;
+        document.getElementById('lastUpdate').textContent = `Actualizado ${now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' })}${usedJsonp ? ' (JSONP)' : ''}`;
       } catch (e) {
         const isFile = location.protocol === 'file:';
         let msg = 'No se pueden cargar los datos del Google Sheet';
         let detail = '';
-        if (isFile) { msg = 'Abre el dashboard desde un servidor web'; detail = 'file:// bloquea peticiones externas. Usa Live Server en VS Code o sube el archivo a un hosting.'; }
-        else if (/HTML_RESPONSE|login|JSONP/i.test(e.message)) { msg = 'La hoja de Google no está publicada en la web'; detail = 'Ve a Archivo → Compartir → Publicar en la web → selecciona la hoja → Publicar.'; }
+        if (isFile) { msg = 'Abre el dashboard desde un servidor web'; detail = 'file:// bloquea peticiones externas.'; }
+        else if (/HTML_RESPONSE|login|JSONP/i.test(e.message)) { msg = 'La hoja de Google no está publicada en la web'; detail = 'Ve a Archivo → Compartir → Publicar en la web.'; }
         else { detail = e.message || 'Abre la consola (F12) para más detalles.'; }
         showErrorBanner(msg, detail);
         document.getElementById('lastUpdate').textContent = 'Error · ' + (e.message || 'desconocido');
@@ -2694,28 +2864,23 @@
     ['fGender', 'fAge', 'fSabor'].forEach(id => {
       document.getElementById(id).addEventListener('change', () => render(getFiltered()));
     });
-    document.getElementById('lastUpdate').style.cursor = 'pointer';
     document.getElementById('lastUpdate').title = 'Haz clic para recargar';
     document.getElementById('lastUpdate').addEventListener('click', fetchData);
 
-    // PDF DOWNLOAD
+    // PDF
     document.getElementById('downloadPdfBtn').addEventListener('click', async function () {
       const btn = this; const orig = btn.innerHTML;
-      btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;animation:spin 1s linear infinite"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Generando…';
+      btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;animation:spin 1s linear infinite"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> Generando…';
       btn.disabled = true;
       try {
         const { jsPDF } = window.jspdf; const pdf = new jsPDF('p', 'mm', 'a4');
-        const pdfW = 210, pdfH = 297, mg = 12, usable = pdfW - mg * 2;
-        let logoData = null, logoRatio = 1;
-        const lEl = document.querySelector('.samplia-logo');
-        if (lEl) { const lc = await html2canvas(lEl, { backgroundColor: null, scale: 2, useCORS: true }); logoData = lc.toDataURL('image/png'); logoRatio = lc.height / lc.width; }
-        const addH = () => { if (logoData) { const lw = 25, lh = lw * logoRatio; pdf.addImage(logoData, 'PNG', mg, mg, lw, lh); } };
-        let y = mg + 12; addH();
-        const blocks = Array.from(document.querySelector('.content').children).filter(el => !el.classList.contains('filter-bar') && el.tagName !== 'SCRIPT');
+        const pdfW = 210, mg = 12, usable = pdfW - mg * 2;
+        let y = mg + 8;
+        const blocks = Array.from(document.querySelector('.main').children).filter(el => !el.classList.contains('filter-bar') && el.tagName !== 'SCRIPT');
         for (const block of blocks) {
-          const canvas = await html2canvas(block, { scale: 1.5, useCORS: true, backgroundColor: '#f8f9ff' });
-          const img = canvas.toDataURL('image/jpeg', .82); const dh = canvas.height * (usable / canvas.width);
-          if (y + dh > pdfH - mg) { pdf.addPage(); addH(); y = mg + 12; }
+          const canvas = await html2canvas(block, { scale: 1.5, useCORS: true, backgroundColor: '#f6f7f9' });
+          const img = canvas.toDataURL('image/jpeg', .85); const dh = canvas.height * (usable / canvas.width);
+          if (y + dh > 297 - mg) { pdf.addPage(); y = mg; }
           pdf.addImage(img, 'JPEG', mg, y, usable, dh); y += dh + 4;
         }
         pdf.save('Resultados_Pascual_Lateado.pdf');
@@ -2730,10 +2895,10 @@
       document.getElementById('scrollProgress').style.width = (ws / h * 100) + '%';
     });
 
-    // STICKY FILTER BAR
+    // STICKY FILTER
     const fb = document.querySelector('.filter-bar');
     if (fb) {
-      const obs = new IntersectionObserver(([e]) => { fb.classList.toggle('is-sticky', e.intersectionRatio < 1); }, { threshold: [1], rootMargin: '-73px 0px 0px 0px' });
+      const obs = new IntersectionObserver(([e]) => { fb.classList.toggle('is-sticky', e.intersectionRatio < 1); }, { threshold: [1], rootMargin: '-65px 0px 0px 0px' });
       obs.observe(fb);
     }
 
@@ -2747,13 +2912,13 @@
     }
     function closeLightbox() {
       const lb = document.getElementById('lightbox'); lb.classList.remove('active');
-      setTimeout(() => { lb.style.display = 'none'; document.body.style.overflow = ''; }, 300);
+      setTimeout(() => { lb.style.display = 'none'; document.body.style.overflow = ''; }, 280);
     }
     document.getElementById('lightbox').addEventListener('click', function (e) { if (e.target === this) closeLightbox(); });
     window.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
     // INIT
-    document.getElementById('lastUpdate').textContent = 'Cargando datos…';
+    document.getElementById('lastUpdate').textContent = 'Cargando…';
     fetchData();
     setInterval(fetchData, 24 * 60 * 60 * 1000);
   </script>
